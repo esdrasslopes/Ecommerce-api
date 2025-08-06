@@ -52,7 +52,7 @@
 - Atributos: id, user_id.
 - Relacionamentos: User
 
-**Catergory:**
+**Category:**
 
 - Atributos: id, name
 - Relacionamentos: Product
@@ -67,3 +67,35 @@
 
 - Atributos: order_id, product_id, quantity, price_at_purchase.
 - Relacionamentos: Order, Product.
+
+## Relacionamentos
+
+### User
+
+- User (1) <-> (N) Order
+- User (1) <-> (1) Carrinho
+
+### Product
+
+- Product (N) <-> (1) Category
+- Product (N) <-> (N) Carrinho
+- Product (N) <-> (N) OrderItem
+
+### Category
+
+- Category (1) <-> (N) Product
+
+### Cart
+
+- Cart (1) <-> (1) User
+- Cart (1) <-> (N) Product
+
+### Order
+
+- Order (N) <-> (1) User
+- Order (1) <-> (N) OrderItem
+
+### OrderItem
+
+- OrderItem (N) <-> (1) Order
+- OrderItem (N) <-> (1) Product
