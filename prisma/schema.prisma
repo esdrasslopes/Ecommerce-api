@@ -12,3 +12,111 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+enum CategoryName {
+  CASUAL
+  SPORT
+  RUNNING
+  WALKING
+  SKATE
+  RETRO
+  PLATFORM
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  CANCELED
+}
+
+model User {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password_hash String
+  created_at    DateTime @default(now())
+  role          Role     @default(MEMBER)
+  Cart          Cart?
+  Order         Order[]
+
+  @@map("users")
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  price       Decimal
+  stock       Int
+  image_url   String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  category    Category    @relation(fields: [category_id], references: [id])
+  category_id String
+  CartItem    CartItem[]
+  OrderItem   OrderItem[]
+
+  @@map("products")
+}
+
+model Cart {
+  id       String     @id @default(uuid())
+  user     User       @relation(fields: [user_id], references: [id])
+  user_id  String     @unique
+  CartItem CartItem[]
+
+  @@map("carts")
+}
+
+model CartItem {
+  id         String  @id @default(uuid())
+  quantity   Int
+  cart       Cart    @relation(fields: [cart_id], references: [id])
+  cart_id    String
+  product    Product @relation(fields: [product_id], references: [id])
+  product_id String
+
+  @@unique([product_id, cart_id])
+  @@map("cartItems")
+}
+
+model Category {
+  id         String       @id @default(uuid())
+  name       CategoryName
+  Product    Product[]
+  created_at DateTime     @default(now())
+
+  @@map("categories")
+}
+
+model Order {
+  id          String      @id @default(uuid())
+  status      OrderStatus
+  created_at  DateTime    @default(now())
+  total_price Decimal
+
+  user      User        @relation(fields: [user_id], references: [id])
+  user_id   String
+  OrderItem OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id                String  @id @default(uuid())
+  quantity          Int
+  price_at_purchase Decimal
+
+  order      Order   @relation(fields: [order_id], references: [id])
+  order_id   String
+  product    Product @relation(fields: [product_id], references: [id])
+  product_id String
+
+  @@map("orderItems")
+}
