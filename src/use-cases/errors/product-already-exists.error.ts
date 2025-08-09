@@ -1,4 +1,4 @@
-export class productAlreadyExistsError extends Error {
+export class ProductAlreadyExistsError extends Error {
   constructor() {
     super("Product Already Exists");
   }

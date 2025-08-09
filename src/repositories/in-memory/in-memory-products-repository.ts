@@ -16,7 +16,7 @@ export class InMemoryProductsRepository implements IProductsRepository {
       id: randomUUID(),
       description: data.description ?? null,
       created_at: new Date(),
-      name: "Air force",
+      name: data.name,
       price: new Prisma.Decimal(data.price as string | number),
       stock: data.stock,
       updated_at: new Date(),
