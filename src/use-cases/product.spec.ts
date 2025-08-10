@@ -2,19 +2,19 @@ import { describe, it, expect, beforeEach } from "vitest";
 
 import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-products-repository";
 
-import { ProductUseCase } from "./product";
+import { CreateProductUseCase } from "./product";
 
 import { ProductAlreadyExistsError } from "./errors/product-already-exists.error";
 
 let productsRepository: InMemoryProductsRepository;
 
-let sut: ProductUseCase;
+let sut: CreateProductUseCase;
 
-describe("Authenticate Use Case", () => {
+describe("Create Product Use Case", () => {
   beforeEach(() => {
     productsRepository = new InMemoryProductsRepository();
 
-    sut = new ProductUseCase(productsRepository);
+    sut = new CreateProductUseCase(productsRepository);
   });
 
   it("should be able to create a new product", async () => {

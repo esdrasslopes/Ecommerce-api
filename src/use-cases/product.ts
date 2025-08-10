@@ -6,7 +6,7 @@ import { ProductWithoutCategoryError } from "./errors/product-without-category.e
 
 import { ProductAlreadyExistsError } from "./errors/product-already-exists.error";
 
-interface ProductUseCaseRequest {
+interface CreateProductUseCaseRequest {
   name: string;
   description?: string;
   price: number;
@@ -15,11 +15,11 @@ interface ProductUseCaseRequest {
   categoryName: CategoryName;
 }
 
-interface ProductUseCaseResponse {
+interface CreateProductUseCaseResponse {
   product: Product;
 }
 
-export class ProductUseCase {
+export class CreateProductUseCase {
   private productsRepository: IProductsRepository;
 
   constructor(productsRepository: IProductsRepository) {
@@ -33,7 +33,7 @@ export class ProductUseCase {
     price,
     stock,
     image_url,
-  }: ProductUseCaseRequest): Promise<ProductUseCaseResponse> {
+  }: CreateProductUseCaseRequest): Promise<CreateProductUseCaseResponse> {
     const category = await this.productsRepository.findCategoryByCategoryName(
       categoryName
     );

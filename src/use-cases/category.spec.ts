@@ -2,19 +2,19 @@ import { describe, it, expect, beforeEach } from "vitest";
 
 import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-products-repository";
 
-import { CategoryUseCase } from "./category";
+import { CreateCategoryUseCase } from "./category";
 
 import { ExistingCategoryError } from "./errors/existing-category-error";
 
 let categoriesRepository: InMemoryProductsRepository;
 
-let sut: CategoryUseCase;
+let sut: CreateCategoryUseCase;
 
-describe("Authenticate Use Case", () => {
+describe("Create Category Use Case", () => {
   beforeEach(() => {
     categoriesRepository = new InMemoryProductsRepository();
 
-    sut = new CategoryUseCase(categoriesRepository);
+    sut = new CreateCategoryUseCase(categoriesRepository);
   });
 
   it("should be able to create a new category", async () => {

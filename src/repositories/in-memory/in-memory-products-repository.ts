@@ -2,16 +2,18 @@ import { Prisma, Product, Category, CategoryName } from "@prisma/client";
 
 import { IProductsRepository } from "../repositories-types/products-repository";
 
+import { updateEntity } from "@/utils/uptade-entity";
+
 import { randomUUID } from "crypto";
+
+import { unwrapAll } from "@/utils/unwrap-value";
 
 export class InMemoryProductsRepository implements IProductsRepository {
   private productsItems: Product[] = [];
 
   private categories: Category[] = [];
 
-  async createProduct(
-    data: Prisma.ProductUncheckedCreateInput
-  ): Promise<Product> {
+  async createProduct(data: Prisma.ProductUncheckedCreateInput) {
     const product: Product = {
       id: randomUUID(),
       description: data.description ?? null,
@@ -29,7 +31,7 @@ export class InMemoryProductsRepository implements IProductsRepository {
     return product;
   }
 
-  async createCategory(categoryName: CategoryName): Promise<Category> {
+  async createCategory(categoryName: CategoryName) {
     const category: Category = {
       id: randomUUID(),
       created_at: new Date(),
@@ -41,9 +43,7 @@ export class InMemoryProductsRepository implements IProductsRepository {
     return category;
   }
 
-  async findCategoryByCategoryName(
-    categoryName: CategoryName
-  ): Promise<Category | null> {
+  async findCategoryByCategoryName(categoryName: CategoryName) {
     const category = this.categories.find(
       (category) => category.name === categoryName
     );
@@ -55,10 +55,7 @@ export class InMemoryProductsRepository implements IProductsRepository {
     return category;
   }
 
-  async findByNameAndCategory(
-    name: string,
-    category_id: string
-  ): Promise<Product | null> {
+  async findByNameAndCategory(name: string, category_id: string) {
     const product = this.productsItems.find(
       (product) => product.name === name && product.category_id === category_id
     );
@@ -68,5 +65,30 @@ export class InMemoryProductsRepository implements IProductsRepository {
     }
 
     return product;
+  }
+
+  async findProductById(productId: String) {
+    const productToUpdate = await this.productsItems.find(
+      (product) => product.id === productId
+    );
+
+    if (!productToUpdate) {
+      return null;
+    }
+
+    return productToUpdate;
+  }
+
+  async updateProduct(
+    data: Prisma.ProductUpdateInput,
+    productToUpdate: Product
+  ) {
+    productToUpdate = updateEntity(productToUpdate, unwrapAll(data));
+
+    this.productsItems = this.productsItems.map((product) => {
+      return product.id === productToUpdate.id ? productToUpdate : product;
+    });
+
+    return productToUpdate;
   }
 }

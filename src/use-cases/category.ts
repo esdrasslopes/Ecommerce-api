@@ -4,15 +4,15 @@ import { Category, CategoryName } from "@prisma/client";
 
 import { ExistingCategoryError } from "./errors/existing-category-error";
 
-interface CategoryUseCaseRequest {
+interface CreateCategoryUseCaseRequest {
   categoryName: CategoryName;
 }
 
-interface CategoryUseCaseResponse {
+interface CreateCategoryUseCaseResponse {
   category: Category;
 }
 
-export class CategoryUseCase {
+export class CreateCategoryUseCase {
   private categoryRepository: IProductsRepository;
 
   constructor(categoryRepository: IProductsRepository) {
@@ -21,7 +21,7 @@ export class CategoryUseCase {
 
   async execute({
     categoryName,
-  }: CategoryUseCaseRequest): Promise<CategoryUseCaseResponse> {
+  }: CreateCategoryUseCaseRequest): Promise<CreateCategoryUseCaseResponse> {
     const categoryWithSameName =
       await this.categoryRepository.findCategoryByCategoryName(categoryName);
 
