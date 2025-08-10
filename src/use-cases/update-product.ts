@@ -1,8 +1,10 @@
 import { IProductsRepository } from "@/repositories/repositories-types/products-repository";
 
-import { Product } from "@prisma/client";
+import { CategoryName, Product } from "@prisma/client";
 
-import { ProductDoesntExistError } from "./errors/product-doesnt-exists-error";
+import { ProductDoesNotExistError } from "./errors/product-does-not-exist-error";
+
+import { CategoryDoesNotExistError } from "./errors/category-does-not-exist";
 
 interface UpdateProductUseCaseRequest {
   name: string;
@@ -10,6 +12,7 @@ interface UpdateProductUseCaseRequest {
   price?: number;
   stock?: number;
   image_url?: string;
+  categoryName?: CategoryName;
 }
 
 interface UpdateProductUseCaseResponse {
@@ -24,7 +27,14 @@ export class UpdateProductUseCase {
   }
 
   async execute(
-    { name, description, price, stock, image_url }: UpdateProductUseCaseRequest,
+    {
+      name,
+      description,
+      price,
+      stock,
+      image_url,
+      categoryName,
+    }: UpdateProductUseCaseRequest,
     productId: string
   ): Promise<UpdateProductUseCaseResponse> {
     const productToUpdate = await this.productsRepository.findProductById(
@@ -32,11 +42,32 @@ export class UpdateProductUseCase {
     );
 
     if (!productToUpdate) {
-      throw new ProductDoesntExistError();
+      throw new ProductDoesNotExistError();
+    }
+
+    let categoryId: string | null = null;
+
+    if (categoryName) {
+      const category = await this.productsRepository.findCategoryByCategoryName(
+        categoryName
+      );
+
+      if (!category) {
+        throw new CategoryDoesNotExistError();
+      }
+
+      categoryId = category.id;
     }
 
     const updatedProduct = await this.productsRepository.updateProduct(
-      { name, description, price, stock, image_url },
+      {
+        name,
+        description,
+        price: price,
+        stock: stock,
+        image_url,
+        ...(categoryId ? { category_id: categoryId } : {}),
+      },
       productToUpdate
     );
 

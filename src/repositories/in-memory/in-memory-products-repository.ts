@@ -68,7 +68,7 @@ export class InMemoryProductsRepository implements IProductsRepository {
   }
 
   async findProductById(productId: String) {
-    const productToUpdate = await this.productsItems.find(
+    const productToUpdate = this.productsItems.find(
       (product) => product.id === productId
     );
 
@@ -90,5 +90,17 @@ export class InMemoryProductsRepository implements IProductsRepository {
     });
 
     return productToUpdate;
+  }
+
+  async getProductsByCategory(categoryId: string) {
+    const products = this.productsItems.filter(
+      (product) => product.category_id === categoryId
+    );
+
+    if (products.length > 0) {
+      return products;
+    }
+
+    return null;
   }
 }

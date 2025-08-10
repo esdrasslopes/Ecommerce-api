@@ -4,7 +4,7 @@ import { CategoryName, Product } from "@prisma/client";
 
 import { ProductWithoutCategoryError } from "./errors/product-without-category.error";
 
-import { ProductAlreadyExistsError } from "./errors/product-already-exists.error";
+import { ProductAlreadyExistError } from "./errors/product-already-exist.error";
 
 interface CreateProductUseCaseRequest {
   name: string;
@@ -46,7 +46,7 @@ export class CreateProductUseCase {
       await this.productsRepository.findByNameAndCategory(name, category.id);
 
     if (productAlreadyExists) {
-      throw new ProductAlreadyExistsError();
+      throw new ProductAlreadyExistError();
     }
 
     const product = await this.productsRepository.createProduct({

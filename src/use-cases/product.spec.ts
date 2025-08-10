@@ -4,7 +4,7 @@ import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-p
 
 import { CreateProductUseCase } from "./product";
 
-import { ProductAlreadyExistsError } from "./errors/product-already-exists.error";
+import { ProductAlreadyExistError } from "./errors/product-already-exist.error";
 
 let productsRepository: InMemoryProductsRepository;
 
@@ -57,6 +57,6 @@ describe("Create Product Use Case", () => {
         description: "Tênis nike air force branco",
         image_url: "example.com",
       });
-    }).rejects.toBeInstanceOf(ProductAlreadyExistsError);
+    }).rejects.toBeInstanceOf(ProductAlreadyExistError);
   });
 });

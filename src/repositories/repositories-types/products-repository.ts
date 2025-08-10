@@ -12,7 +12,8 @@ export interface IProductsRepository {
   ): Promise<Product | null>;
   findProductById(productId: string): Promise<Product | null>;
   updateProduct(
-    data: Prisma.ProductUpdateInput,
+    data: Prisma.ProductUncheckedUpdateInput,
     productToUpdate: Product
   ): Promise<Product>;
+  getProductsByCategory(categoryId: string): Promise<Product[] | null>;
 }
