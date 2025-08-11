@@ -8,7 +8,7 @@ let productsRepository: InMemoryProductsRepository;
 
 let sut: ListProductsByNameUseCase;
 
-describe("List Products By Category Use Case", () => {
+describe("List Products By Name Use Case", () => {
   beforeEach(() => {
     productsRepository = new InMemoryProductsRepository();
 

@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach } from "vitest";
 
 import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-products-repository";
 
-import { CreateCategoryUseCase } from "./category";
+import { CreateCategoryUseCase } from "./create-category";
 
 import { ExistingCategoryError } from "./errors/existing-category-error";
 

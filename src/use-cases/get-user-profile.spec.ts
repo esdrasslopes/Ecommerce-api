@@ -10,14 +10,14 @@ let usersRepository: InMemoryUsersRepository;
 
 let sut: GetUserProfilUseCase;
 
-describe("Authenticate Use Case", () => {
+describe("Get User Profile Use Case", () => {
   beforeEach(() => {
     usersRepository = new InMemoryUsersRepository();
 
     sut = new GetUserProfilUseCase(usersRepository);
   });
 
-  it("should be able to authenticate", async () => {
+  it("should be able to get user profile", async () => {
     const createdUser = await usersRepository.create({
       name: "John Doe",
       email: "johndoe@gmail.com",

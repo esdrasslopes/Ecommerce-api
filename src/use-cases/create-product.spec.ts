@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach } from "vitest";
 
 import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-products-repository";
 
-import { CreateProductUseCase } from "./product";
+import { CreateProductUseCase } from "./create-product";
 
 import { ProductAlreadyExistError } from "./errors/product-already-exist.error";
 

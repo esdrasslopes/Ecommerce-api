@@ -11,18 +11,17 @@ interface ListProductsByNameUseCaseResponse {
 }
 
 export class ListProductsByNameUseCase {
-  private productsRepository: IProductsRepository;
+  private listProductsByNameRepository: IProductsRepository;
 
-  constructor(productsRepository: IProductsRepository) {
-    this.productsRepository = productsRepository;
+  constructor(listProductsByNameRepository: IProductsRepository) {
+    this.listProductsByNameRepository = listProductsByNameRepository;
   }
 
   async execute({
     productName,
   }: ListProductsByNameUseCaseRequest): Promise<ListProductsByNameUseCaseResponse> {
-    const productsByName = await this.productsRepository.getProductsByName(
-      productName
-    );
+    const productsByName =
+      await this.listProductsByNameRepository.getProductsByName(productName);
 
     return { productsByName };
   }

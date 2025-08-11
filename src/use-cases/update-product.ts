@@ -20,10 +20,10 @@ interface UpdateProductUseCaseResponse {
 }
 
 export class UpdateProductUseCase {
-  private productsRepository: IProductsRepository;
+  private updateProductRepository: IProductsRepository;
 
-  constructor(productsRepository: IProductsRepository) {
-    this.productsRepository = productsRepository;
+  constructor(updateProductRepository: IProductsRepository) {
+    this.updateProductRepository = updateProductRepository;
   }
 
   async execute(
@@ -37,7 +37,7 @@ export class UpdateProductUseCase {
     }: UpdateProductUseCaseRequest,
     productId: string
   ): Promise<UpdateProductUseCaseResponse> {
-    const productToUpdate = await this.productsRepository.findProductById(
+    const productToUpdate = await this.updateProductRepository.findProductById(
       productId
     );
 
@@ -48,9 +48,10 @@ export class UpdateProductUseCase {
     let categoryId: string | null = null;
 
     if (categoryName) {
-      const category = await this.productsRepository.findCategoryByCategoryName(
-        categoryName
-      );
+      const category =
+        await this.updateProductRepository.findCategoryByCategoryName(
+          categoryName
+        );
 
       if (!category) {
         throw new CategoryDoesNotExistError();
@@ -59,7 +60,7 @@ export class UpdateProductUseCase {
       categoryId = category.id;
     }
 
-    const updatedProduct = await this.productsRepository.updateProduct(
+    const updatedProduct = await this.updateProductRepository.updateProduct(
       {
         name,
         description,

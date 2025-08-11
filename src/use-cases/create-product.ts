@@ -20,10 +20,10 @@ interface CreateProductUseCaseResponse {
 }
 
 export class CreateProductUseCase {
-  private productsRepository: IProductsRepository;
+  private createProductRepository: IProductsRepository;
 
-  constructor(productsRepository: IProductsRepository) {
-    this.productsRepository = productsRepository;
+  constructor(createProductRepository: IProductsRepository) {
+    this.createProductRepository = createProductRepository;
   }
 
   async execute({
@@ -34,22 +34,26 @@ export class CreateProductUseCase {
     stock,
     image_url,
   }: CreateProductUseCaseRequest): Promise<CreateProductUseCaseResponse> {
-    const category = await this.productsRepository.findCategoryByCategoryName(
-      categoryName
-    );
+    const category =
+      await this.createProductRepository.findCategoryByCategoryName(
+        categoryName
+      );
 
     if (!category) {
       throw new ProductWithoutCategoryError();
     }
 
     const productAlreadyExists =
-      await this.productsRepository.findByNameAndCategory(name, category.id);
+      await this.createProductRepository.findByNameAndCategory(
+        name,
+        category.id
+      );
 
     if (productAlreadyExists) {
       throw new ProductAlreadyExistError();
     }
 
-    const product = await this.productsRepository.createProduct({
+    const product = await this.createProductRepository.createProduct({
       name,
       description,
       price,

@@ -13,25 +13,26 @@ interface ListProductsByCategoryUseCaseResponse {
 }
 
 export class ListProductsByCategoryUseCase {
-  private productsRepository: IProductsRepository;
+  private listProductsRepository: IProductsRepository;
 
-  constructor(productsRepository: IProductsRepository) {
-    this.productsRepository = productsRepository;
+  constructor(listProductsRepository: IProductsRepository) {
+    this.listProductsRepository = listProductsRepository;
   }
 
   async execute({
     categoryName,
   }: ListProductsByCategoryUseCaseRequest): Promise<ListProductsByCategoryUseCaseResponse> {
-    const category = await this.productsRepository.findCategoryByCategoryName(
-      categoryName
-    );
+    const category =
+      await this.listProductsRepository.findCategoryByCategoryName(
+        categoryName
+      );
 
     if (!category) {
       throw new CategoryDoesNotExistError();
     }
 
     const productsByCategory =
-      await this.productsRepository.getProductsByCategory(category.id);
+      await this.listProductsRepository.getProductsByCategory(category.id);
 
     return { productsByCategory };
   }

@@ -8,14 +8,14 @@ let productsRepository: InMemoryProductsRepository;
 
 let sut: ListProductsByPriceUseCase;
 
-describe("List Products By Category Use Case", () => {
+describe("List Products By Price Use Case", () => {
   beforeEach(() => {
     productsRepository = new InMemoryProductsRepository();
 
     sut = new ListProductsByPriceUseCase(productsRepository);
   });
 
-  it("should be able to list products by name", async () => {
+  it("should be able to list products by price", async () => {
     const casualCategory = await productsRepository.createCategory("CASUAL");
 
     const sportCategory = await productsRepository.createCategory("SPORT");
@@ -50,8 +50,6 @@ describe("List Products By Category Use Case", () => {
     const { productsByPrice } = await sut.execute({
       price: 400,
     });
-
-    console.log(productsByPrice);
 
     expect(productsByPrice).toHaveLength(2);
   });

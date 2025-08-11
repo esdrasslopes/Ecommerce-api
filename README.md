@@ -9,7 +9,7 @@
 - [] O usuário deve conseguir adicionar um produto ao carrinho.
 - [] O usuário deve conseguir ver o seu historico de compras.
 - [] O usuário deve conseguir ver o seu carrinho.
-- [] O usuário deve conseguir filtrar produtos a partir de sua categoria, preço ou nome.
+- [x] O usuário deve conseguir filtrar produtos a partir de sua categoria, preço ou nome.
 - [] O usuário deve conseguir ver detalhes sobre um produto em específico.
 - [] O usuário deve conseguir ver detalhes do pedido (Ex: pago, entregue).
 - [x] O usuário administrador deve conseguir adicionar itens ao sistema.
