@@ -15,5 +15,7 @@ export interface IProductsRepository {
     data: Prisma.ProductUncheckedUpdateInput,
     productToUpdate: Product
   ): Promise<Product>;
-  getProductsByCategory(categoryId: string): Promise<Product[] | null>;
+  getProductsByCategory(categoryId: string): Promise<Product[]>;
+  getProductsByName(name: string): Promise<Product[]>;
+  getProductsByPrice(price: number): Promise<Product[]>;
 }

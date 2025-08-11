@@ -2,28 +2,26 @@ import { describe, it, expect, beforeEach } from "vitest";
 
 import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-products-repository";
 
-import { ListProductsByCategoryUseCase } from "./list-products-by-category";
-
-import { CategoryDoesNotExistError } from "./errors/category-does-not-exist";
+import { ListProductsByPriceUseCase } from "./list-products-by-price";
 
 let productsRepository: InMemoryProductsRepository;
 
-let sut: ListProductsByCategoryUseCase;
+let sut: ListProductsByPriceUseCase;
 
 describe("List Products By Category Use Case", () => {
   beforeEach(() => {
     productsRepository = new InMemoryProductsRepository();
 
-    sut = new ListProductsByCategoryUseCase(productsRepository);
+    sut = new ListProductsByPriceUseCase(productsRepository);
   });
 
-  it("should be able to list products by a specific category", async () => {
+  it("should be able to list products by name", async () => {
     const casualCategory = await productsRepository.createCategory("CASUAL");
 
     const sportCategory = await productsRepository.createCategory("SPORT");
 
     await productsRepository.createProduct({
-      name: "Air force",
+      name: "Air force Branco",
       price: 400,
       stock: 10,
       description: "Tênis nike air force branco",
@@ -32,7 +30,7 @@ describe("List Products By Category Use Case", () => {
     });
 
     await productsRepository.createProduct({
-      name: "Air force",
+      name: "Air force Preto",
       price: 400,
       stock: 10,
       description: "Tênis nike air force branco",
@@ -41,35 +39,20 @@ describe("List Products By Category Use Case", () => {
     });
 
     await productsRepository.createProduct({
-      name: "Air force",
-      price: 400,
+      name: "Air force Marrom",
+      price: 450,
       stock: 10,
       description: "Tênis nike air force branco",
       image_url: "example.com",
       category_id: sportCategory.id,
     });
 
-    const { productsByCategory } = await sut.execute({
-      categoryName: "SPORT",
-    });
-
-    expect(productsByCategory).toHaveLength(2);
-  });
-
-  it("should not be able to list products by a specific category", async () => {
-    await productsRepository.createProduct({
-      name: "Air force",
+    const { productsByPrice } = await sut.execute({
       price: 400,
-      stock: 10,
-      description: "Tênis nike air force branco",
-      image_url: "example.com",
-      category_id: "",
     });
 
-    await expect(async () => {
-      await sut.execute({
-        categoryName: "SPORT",
-      });
-    }).rejects.toBeInstanceOf(CategoryDoesNotExistError);
+    console.log(productsByPrice);
+
+    expect(productsByPrice).toHaveLength(2);
   });
 });

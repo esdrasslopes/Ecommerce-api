@@ -4,17 +4,15 @@ import { CategoryName, Product } from "@prisma/client";
 
 import { CategoryDoesNotExistError } from "./errors/category-does-not-exist";
 
-import { ProductDoesNotExistError } from "./errors/product-does-not-exist-error";
-
-interface ListProductsByCategoryRequest {
+interface ListProductsByCategoryUseCaseRequest {
   categoryName: CategoryName;
 }
 
-interface ListProductsByCategoryResponse {
-  productsByRepository: Product[];
+interface ListProductsByCategoryUseCaseResponse {
+  productsByCategory: Product[];
 }
 
-export class ListProductsByCategory {
+export class ListProductsByCategoryUseCase {
   private productsRepository: IProductsRepository;
 
   constructor(productsRepository: IProductsRepository) {
@@ -23,7 +21,7 @@ export class ListProductsByCategory {
 
   async execute({
     categoryName,
-  }: ListProductsByCategoryRequest): Promise<ListProductsByCategoryResponse> {
+  }: ListProductsByCategoryUseCaseRequest): Promise<ListProductsByCategoryUseCaseResponse> {
     const category = await this.productsRepository.findCategoryByCategoryName(
       categoryName
     );
@@ -35,10 +33,6 @@ export class ListProductsByCategory {
     const productsByCategory =
       await this.productsRepository.getProductsByCategory(category.id);
 
-    if (!productsByCategory) {
-      throw new ProductDoesNotExistError();
-    }
-
-    return { productsByRepository: productsByCategory };
+    return { productsByCategory };
   }
 }

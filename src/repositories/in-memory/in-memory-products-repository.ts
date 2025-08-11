@@ -97,10 +97,24 @@ export class InMemoryProductsRepository implements IProductsRepository {
       (product) => product.category_id === categoryId
     );
 
-    if (products.length > 0) {
-      return products;
-    }
+    return products;
+  }
 
-    return null;
+  async getProductsByName(name: string) {
+    const productName = name.toLowerCase();
+
+    const products = this.productsItems.filter((product) => {
+      return product.name.toLowerCase().includes(productName);
+    });
+
+    return products;
+  }
+
+  async getProductsByPrice(price: number) {
+    const products = this.productsItems.filter(
+      (product) => Number(product.price) === price
+    );
+
+    return products;
   }
 }

@@ -4,7 +4,7 @@
 
 - [x] O usuário deve conseguir se cadastrar.
 - [x] O usuário deve conseguir se autenticar.
-- [] O usuário deve conseguir acessar os dados do seu perfil.
+- [x] O usuário deve conseguir acessar os dados do seu perfil.
 - [] O usuário deve conseguir comprar um produto.
 - [] O usuário deve conseguir adicionar um produto ao carrinho.
 - [] O usuário deve conseguir ver o seu historico de compras.
@@ -12,15 +12,15 @@
 - [] O usuário deve conseguir filtrar produtos a partir de sua categoria, preço ou nome.
 - [] O usuário deve conseguir ver detalhes sobre um produto em específico.
 - [] O usuário deve conseguir ver detalhes do pedido (Ex: pago, entregue).
-- [] O usuário administrador deve conseguir adicionar itens ao sistema.
-- [] O usuário administrador deve conseguir adicionar categorias ao sistema.
+- [x] O usuário administrador deve conseguir adicionar itens ao sistema.
+- [x] O usuário administrador deve conseguir adicionar categorias ao sistema.
 - [] O usuário administrador deve conseguir vizualizar o histórico de pedidos.
 - [] O usuário administrador deve conseguir validar a situação de um produto.
 - [] O usuário deve conseguir cancelar um pedido.
 
 ## RN
 
-- [] Apenas administradores podem adicionar produtos.
+- [x] Apenas administradores podem adicionar produtos.
 - [] Apenas o usuário administrador deve validar a situação de um produto.
 - [] Apenas produtos disponíveis em estoque devem estar disponíveis.
 - [] Um pedido só pode ser cancelado pelo usuário enquanto estiver no status "pendente".
@@ -29,10 +29,10 @@
 
 ## RNF
 
-- [] O banco de dados utilizado deve ser Postgresql
+- [x] O banco de dados utilizado deve ser Postgresql
 - [] As requisições de um usuário devem ser feitas a partir de um token JWT
-- [] O backend deve ser desenvolvido com Node.js, Fastify e TypeScript.
-- [] O sistema deve estar containerizado com Docker para facilitar desenvolvimento e implantação.
+- [x] O backend deve ser desenvolvido com Node.js, Fastify e TypeScript.
+- [x] O sistema deve estar containerizado com Docker para facilitar desenvolvimento e implantação.
 
 # 📦 Modelagem
 
