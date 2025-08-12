@@ -1,3 +1,5 @@
+import { CartItems } from "@/types";
+
 import { Prisma, Product, Category, CategoryName } from "@prisma/client";
 
 export interface IProductsRepository {
@@ -11,6 +13,7 @@ export interface IProductsRepository {
     categoryId: string
   ): Promise<Product | null>;
   findProductById(productId: string): Promise<Product | null>;
+  findManyByIds(productsIds: string[]): Promise<CartItems[]>;
   updateProduct(
     data: Prisma.ProductUncheckedUpdateInput,
     productToUpdate: Product

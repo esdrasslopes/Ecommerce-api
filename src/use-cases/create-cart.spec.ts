@@ -8,7 +8,7 @@ import { createUser } from "@/utils/test/create-user";
 
 import { User } from "@prisma/client";
 
-let productsRepository: InMemoryCartsRepository;
+let cartsRepository: InMemoryCartsRepository;
 
 let sut: CreateCartUseCase;
 
@@ -16,9 +16,9 @@ let createdUser: User;
 
 describe("Create Product Use Case", () => {
   beforeEach(async () => {
-    productsRepository = new InMemoryCartsRepository();
+    cartsRepository = new InMemoryCartsRepository();
 
-    sut = new CreateCartUseCase(productsRepository);
+    sut = new CreateCartUseCase(cartsRepository);
 
     const { user } = await createUser();
 

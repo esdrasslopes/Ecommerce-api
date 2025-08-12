@@ -20,7 +20,7 @@ export class CreateCartUseCase {
   async execute({
     userId,
   }: CreateCartUseCaseRequest): Promise<CreateCartUseCaseResponse> {
-    const cart = await this.createCartRepository.create(userId);
+    const cart = await this.createCartRepository.createCart(userId);
 
     return { cart };
   }

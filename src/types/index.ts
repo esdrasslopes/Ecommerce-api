@@ -5,3 +5,8 @@ export const envSchema = z.object({
   PORT: z.coerce.number().default(3333),
   JWT_SECRET: z.string(),
 });
+
+export interface CartItems {
+  name: string;
+  price: number;
+}

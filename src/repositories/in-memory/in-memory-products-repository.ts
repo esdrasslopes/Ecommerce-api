@@ -7,6 +7,7 @@ import { updateEntity } from "@/utils/uptade-entity";
 import { randomUUID } from "crypto";
 
 import { unwrapAll } from "@/utils/unwrap-value";
+import { CartItems } from "@/types";
 
 export class InMemoryProductsRepository implements IProductsRepository {
   private productsItems: Product[] = [];
@@ -68,15 +69,15 @@ export class InMemoryProductsRepository implements IProductsRepository {
   }
 
   async findProductById(productId: String) {
-    const productToUpdate = this.productsItems.find(
+    const product = this.productsItems.find(
       (product) => product.id === productId
     );
 
-    if (!productToUpdate) {
+    if (!product) {
       return null;
     }
 
-    return productToUpdate;
+    return product;
   }
 
   async updateProduct(
@@ -116,5 +117,20 @@ export class InMemoryProductsRepository implements IProductsRepository {
     );
 
     return products;
+  }
+
+  async findManyByIds(productsIds: string[]) {
+    const products = this.productsItems.filter((product) =>
+      productsIds.includes(product.id)
+    );
+
+    const cartItems = products.map((item) => {
+      return {
+        name: item.name,
+        price: Number(item.price),
+      };
+    });
+
+    return cartItems;
   }
 }
