@@ -1,4 +1,4 @@
-import { ICartRepository } from "@/repositories/repositories-types/carts-repository";
+import { ICartsRepository } from "@/repositories/repositories-types/carts-repository";
 
 import { Cart } from "@prisma/client";
 
@@ -11,9 +11,9 @@ interface CreateCartUseCaseResponse {
 }
 
 export class CreateCartUseCase {
-  private createCartRepository: ICartRepository;
+  private createCartRepository: ICartsRepository;
 
-  constructor(createCartRepository: ICartRepository) {
+  constructor(createCartRepository: ICartsRepository) {
     this.createCartRepository = createCartRepository;
   }
 

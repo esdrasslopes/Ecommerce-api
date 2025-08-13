@@ -1,3 +1,5 @@
+import { Order, OrderItem } from "@prisma/client";
+
 import { z } from "zod";
 
 export const envSchema = z.object({
@@ -7,6 +9,11 @@ export const envSchema = z.object({
 });
 
 export interface CartItems {
+  id: string;
   name: string;
   price: number;
 }
+
+export type OrderWithItems = Order & {
+  items?: OrderItem[];
+};

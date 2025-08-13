@@ -128,6 +128,7 @@ export class InMemoryProductsRepository implements IProductsRepository {
       return {
         name: item.name,
         price: Number(item.price),
+        id: item.id,
       };
     });
 

@@ -1,6 +1,6 @@
 import { Cart, CartItem } from "@prisma/client";
 
-export interface ICartRepository {
+export interface ICartsRepository {
   createCart(userId: string): Promise<Cart>;
   findCartById(id: string): Promise<Cart | null>;
   addItemtoCart(

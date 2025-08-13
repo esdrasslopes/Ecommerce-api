@@ -1,10 +1,10 @@
 import { Cart, CartItem } from "@prisma/client";
 
-import { ICartRepository } from "../repositories-types/carts-repository";
+import { ICartsRepository } from "../repositories-types/carts-repository";
 
 import { randomUUID } from "crypto";
 
-export class InMemoryCartsRepository implements ICartRepository {
+export class InMemoryCartsRepository implements ICartsRepository {
   private carts: Cart[] = [];
 
   private cartItems: CartItem[] = [];

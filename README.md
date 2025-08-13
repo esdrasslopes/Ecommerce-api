@@ -6,9 +6,9 @@
 - [x] O usuário deve conseguir se autenticar.
 - [x] O usuário deve conseguir acessar os dados do seu perfil.
 - [] O usuário deve conseguir comprar um produto.
-- [] O usuário deve conseguir adicionar um produto ao carrinho.
+- [x] O usuário deve conseguir adicionar um produto ao carrinho.
 - [] O usuário deve conseguir ver o seu historico de compras.
-- [] O usuário deve conseguir ver o seu carrinho.
+- [x] O usuário deve conseguir ver o seu carrinho.
 - [x] O usuário deve conseguir filtrar produtos a partir de sua categoria, preço ou nome.
 - [] O usuário deve conseguir ver detalhes sobre um produto em específico.
 - [] O usuário deve conseguir ver detalhes do pedido (Ex: pago, entregue).
@@ -20,7 +20,7 @@
 
 ## RN
 
-- [x] Apenas administradores podem adicionar produtos.
+- [] Apenas administradores podem adicionar produtos.
 - [] Apenas o usuário administrador deve validar a situação de um produto.
 - [] Apenas produtos disponíveis em estoque devem estar disponíveis.
 - [] Um pedido só pode ser cancelado pelo usuário enquanto estiver no status "pendente".

@@ -1,4 +1,4 @@
-import { ICartRepository } from "@/repositories/repositories-types/carts-repository";
+import { ICartsRepository } from "@/repositories/repositories-types/carts-repository";
 
 import { IProductsRepository } from "@/repositories/repositories-types/products-repository";
 
@@ -13,12 +13,12 @@ interface GetItemsFromCartUseCaseResponse {
 }
 
 export class GetItemsFromCartUseCase {
-  private getItemsFromCartRepository: ICartRepository;
+  private getItemsFromCartRepository: ICartsRepository;
 
   private productsRepository: IProductsRepository;
 
   constructor(
-    getItemsFromCartRepository: ICartRepository,
+    getItemsFromCartRepository: ICartsRepository,
     productsRepository: IProductsRepository
   ) {
     this.getItemsFromCartRepository = getItemsFromCartRepository;

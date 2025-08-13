@@ -18,7 +18,7 @@ let sut: GetItemsFromCartUseCase;
 
 let createdUser: User;
 
-describe("Get Products From Cart Use Case Use Case", () => {
+describe("Get Products From Cart Use Case", () => {
   beforeEach(async () => {
     getItemsFromCartRepository = new InMemoryCartsRepository();
 
