@@ -8,6 +8,7 @@ import { randomUUID } from "crypto";
 
 import { unwrapAll } from "@/utils/unwrap-value";
 import { CartItems } from "@/types";
+import { ProductDoesNotExistError } from "@/use-cases/errors/product-does-not-exist-error";
 
 export class InMemoryProductsRepository implements IProductsRepository {
   private productsItems: Product[] = [];
@@ -133,5 +134,17 @@ export class InMemoryProductsRepository implements IProductsRepository {
     });
 
     return cartItems;
+  }
+
+  async updateProductStock(id: string, quantity: number) {
+    const product = this.productsItems.find((product) => product.id === id);
+
+    if (!product) {
+      throw new ProductDoesNotExistError();
+    }
+
+    product.stock -= quantity;
+
+    return product;
   }
 }

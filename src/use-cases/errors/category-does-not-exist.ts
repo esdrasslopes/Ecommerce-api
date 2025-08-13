@@ -1,5 +1,5 @@
 export class CategoryDoesNotExistError extends Error {
   constructor() {
-    super("Category Doesnt Exists");
+    super("Category Does Not Exists");
   }
 }

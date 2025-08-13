@@ -21,4 +21,5 @@ export interface IProductsRepository {
   getProductsByCategory(categoryId: string): Promise<Product[]>;
   getProductsByName(name: string): Promise<Product[]>;
   getProductsByPrice(price: number): Promise<Product[]>;
+  updateProductStock(id: string, quantity: number): Promise<Product>;
 }

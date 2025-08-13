@@ -2,44 +2,82 @@ import { describe, it, expect, beforeEach } from "vitest";
 
 import { InMemoryCartsRepository } from "@/repositories/in-memory/in-memory-carts-repository";
 
+import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-products-repository";
+
 import { AddItemToCartUseCase } from "./add-item-to-cart";
 
 import { createUser } from "@/utils/test/create-user";
 
-import { CreateProducts } from "@/utils/test/create-products";
+import { User } from "@prisma/client";
 
-import { Product, User } from "@prisma/client";
+import { ProductWithInsufficientStockError } from "./errors/product-with-insufficient-stock-error";
 
 let addItemToCartRepository: InMemoryCartsRepository;
+
+let productsRepository: InMemoryProductsRepository;
 
 let sut: AddItemToCartUseCase;
 
 let createdUser: User;
 
-let product: Product;
-
 describe("Add Item to Cart Use Case", () => {
   beforeEach(async () => {
     addItemToCartRepository = new InMemoryCartsRepository();
 
-    sut = new AddItemToCartUseCase(addItemToCartRepository);
+    productsRepository = new InMemoryProductsRepository();
+
+    sut = new AddItemToCartUseCase(addItemToCartRepository, productsRepository);
 
     const { user } = await createUser();
 
     createdUser = user;
-
-    product = await CreateProducts();
   });
 
   it("should be able to add item to cart", async () => {
     const cart = await addItemToCartRepository.createCart(createdUser.id);
 
+    const category = await productsRepository.createCategory("CASUAL");
+
+    const product = await productsRepository.createProduct({
+      name: "Air force",
+      price: 500,
+      stock: 10,
+      description: "",
+      image_url: "example",
+      category_id: category.id,
+    });
+
     const { cartItem } = await sut.execute({
       cartId: cart.id,
       productId: product.id,
-      quantity: 10,
+      quantity: 9,
     });
 
-    expect(cartItem.quantity).toEqual(10);
+    expect(cartItem.quantity).toEqual(9);
+
+    expect(product.stock).toEqual(1);
+  });
+
+  it("should be not able to add item to cart with insufficient stock", async () => {
+    const cart = await addItemToCartRepository.createCart(createdUser.id);
+
+    const category = await productsRepository.createCategory("CASUAL");
+
+    const product = await productsRepository.createProduct({
+      name: "Air force",
+      price: 500,
+      stock: 0,
+      description: "",
+      image_url: "example",
+      category_id: category.id,
+    });
+
+    await expect(async () => {
+      await sut.execute({
+        cartId: cart.id,
+        productId: product.id,
+        quantity: 10,
+      });
+    }).rejects.toBeInstanceOf(ProductWithInsufficientStockError);
   });
 });

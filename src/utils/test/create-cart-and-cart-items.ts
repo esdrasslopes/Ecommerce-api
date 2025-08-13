@@ -11,11 +11,7 @@ export const createCartAndCartItems = async (
   const cart = await cartRepository.createCart(userId);
 
   for (const product of products) {
-    const cartItem = await cartRepository.addItemtoCart(
-      cart.id,
-      product.id,
-      10
-    );
+    await cartRepository.addItemtoCart(cart.id, product.id, 10);
   }
 
   const itemsFromCart = await cartRepository.getCartItemsFromCart(cart.id);

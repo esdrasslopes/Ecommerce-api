@@ -4,6 +4,8 @@ import { ICartsRepository } from "../repositories-types/carts-repository";
 
 import { randomUUID } from "crypto";
 
+import { CartItemDoesNotExistError } from "@/use-cases/errors/cart-item-does-not-exist-error";
+
 export class InMemoryCartsRepository implements ICartsRepository {
   private carts: Cart[] = [];
 
@@ -47,5 +49,17 @@ export class InMemoryCartsRepository implements ICartsRepository {
     const items = this.cartItems.filter((item) => item.cart_id === cartId);
 
     return items;
+  }
+
+  async updateCartItemQuantity(id: string, quantity: number) {
+    const cartItem = this.cartItems.find((item) => item.id === id);
+
+    if (!cartItem) {
+      throw new CartItemDoesNotExistError();
+    }
+
+    cartItem.quantity = quantity;
+
+    return cartItem;
   }
 }

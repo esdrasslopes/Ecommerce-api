@@ -9,4 +9,5 @@ export interface ICartsRepository {
     quantity: number
   ): Promise<CartItem>;
   getCartItemsFromCart(cartId: string): Promise<CartItem[]>;
+  updateCartItemQuantity(id: string, quantity: number): Promise<CartItem>;
 }
