@@ -11,11 +11,11 @@
 - [x] O usuário deve conseguir ver o seu carrinho.
 - [x] O usuário deve conseguir filtrar produtos a partir de sua categoria, preço ou nome.
 - [x] O usuário deve conseguir ver detalhes sobre um produto em específico.
-- [] O usuário deve conseguir ver detalhes do pedido (Ex: pago, entregue).
+- [x] O usuário deve conseguir ver detalhes do pedido (Ex: pago, entregue).
 - [x] O usuário administrador deve conseguir adicionar itens ao sistema.
 - [x] O usuário administrador deve conseguir adicionar categorias ao sistema.
 - [x] O usuário administrador deve conseguir vizualizar o histórico de pedidos.
-- [] O usuário administrador deve conseguir validar a situação de um produto.
+- [x] O usuário administrador deve conseguir validar a situação de um produto.
 - [x] O usuário deve conseguir cancelar um pedido.
 
 ## RN
