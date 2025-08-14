@@ -8,4 +8,5 @@ export interface IOrdersRepository {
     data: Prisma.OrderItemUncheckedCreateInput
   ): Promise<OrderItem>;
   validateOrder(orderId: string): Promise<OrderWithItems | null>;
+  cancelOrder(orderId: string): Promise<OrderWithItems | null>;
 }

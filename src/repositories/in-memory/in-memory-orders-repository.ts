@@ -14,7 +14,7 @@ export class InMemoryOrdersRepository implements IOrdersRepository {
   async createOrder(data: Prisma.OrderUncheckedCreateInput) {
     const order: OrderWithItems = {
       id: randomUUID(),
-      status: "PENDING",
+      status: data.status ?? "PENDING",
       total_price: new Prisma.Decimal(data.total_price as string | number),
       created_at: new Date(),
       user_id: data.user_id,
@@ -56,5 +56,21 @@ export class InMemoryOrdersRepository implements IOrdersRepository {
     order.status = "COMPLETED";
 
     return order;
+  }
+
+  async cancelOrder(orderId: string) {
+    const orderToCancel = this.orders.find((order) => order.id === orderId);
+
+    if (
+      !orderToCancel ||
+      orderToCancel.status === "COMPLETED" ||
+      orderToCancel.status === "CANCELED"
+    ) {
+      return null;
+    }
+
+    orderToCancel.status = "CANCELED";
+
+    return orderToCancel;
   }
 }
