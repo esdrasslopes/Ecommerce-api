@@ -1,4 +1,4 @@
-import { CartItems, OrderWithItems } from "@/types";
+import { OrderWithItems } from "@/types";
 
 import { OrderItem, Prisma } from "@prisma/client";
 
@@ -7,4 +7,5 @@ export interface IOrdersRepository {
   createOrderItems(
     data: Prisma.OrderItemUncheckedCreateInput
   ): Promise<OrderItem>;
+  validateOrder(orderId: string): Promise<OrderWithItems | null>;
 }

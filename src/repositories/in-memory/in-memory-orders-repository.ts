@@ -1,4 +1,4 @@
-import { OrderItem, Prisma } from "@prisma/client";
+import { Order, OrderItem, Prisma } from "@prisma/client";
 
 import { IOrdersRepository } from "../repositories-types/orders-repository";
 
@@ -44,5 +44,17 @@ export class InMemoryOrdersRepository implements IOrdersRepository {
     order.items?.push(orderItem);
 
     return orderItem;
+  }
+
+  async validateOrder(orderId: string) {
+    const order = this.orders.find((order) => order.id === orderId);
+
+    if (!order) {
+      return null;
+    }
+
+    order.status = "COMPLETED";
+
+    return order;
   }
 }
