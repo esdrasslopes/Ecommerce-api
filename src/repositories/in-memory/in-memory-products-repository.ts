@@ -7,7 +7,7 @@ import { updateEntity } from "@/utils/uptade-entity";
 import { randomUUID } from "crypto";
 
 import { unwrapAll } from "@/utils/unwrap-value";
-import { CartItems } from "@/types";
+
 import { ProductDoesNotExistError } from "@/use-cases/errors/product-does-not-exist-error";
 
 export class InMemoryProductsRepository implements IProductsRepository {
@@ -26,6 +26,7 @@ export class InMemoryProductsRepository implements IProductsRepository {
       updated_at: new Date(),
       image_url: data.image_url || null,
       category_id: data.category_id,
+      is_available: data.is_available ?? true,
     };
 
     this.productsItems.push(product);
@@ -145,6 +146,28 @@ export class InMemoryProductsRepository implements IProductsRepository {
 
     product.stock -= quantity;
 
+    if (product.stock === 0) {
+      product.is_available = false;
+    }
+
     return product;
+  }
+
+  async getAvailableProducts() {
+    const productsAvailables = this.productsItems.filter(
+      (item) => item.is_available === true
+    );
+
+    return productsAvailables;
+  }
+
+  async deleteProductById(id: string) {
+    const deletedProduct = this.productsItems.find((item) => item.id === id);
+
+    this.productsItems = this.productsItems.filter(
+      (item) => item.id !== deletedProduct!.id
+    );
+
+    return deletedProduct!;
   }
 }

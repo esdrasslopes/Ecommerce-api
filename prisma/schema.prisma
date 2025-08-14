@@ -48,14 +48,15 @@ model User {
 }
 
 model Product {
-  id          String   @id @default(uuid())
-  name        String
-  description String?
-  price       Decimal
-  stock       Int
-  image_url   String?
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  id           String   @id @default(uuid())
+  name         String
+  description  String?
+  price        Decimal
+  stock        Int
+  image_url    String?
+  is_available Boolean  @default(true)
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
 
   category    Category    @relation(fields: [category_id], references: [id])
   category_id String
