@@ -10,4 +10,5 @@ export interface IOrdersRepository {
   validateOrder(orderId: string): Promise<OrderWithItems | null>;
   cancelOrder(orderId: string): Promise<OrderWithItems | null>;
   getOrdersHistory(userId: string): Promise<OrderWithItems[]>;
+  getDetailsOfASpecificOrder(orderId: string): Promise<OrderWithItems | null>;
 }

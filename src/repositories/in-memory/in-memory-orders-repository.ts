@@ -79,4 +79,14 @@ export class InMemoryOrdersRepository implements IOrdersRepository {
 
     return orders;
   }
+
+  async getDetailsOfASpecificOrder(orderId: string) {
+    const order = this.orders.find((order) => order.id === orderId);
+
+    if (!order) {
+      return null;
+    }
+
+    return order;
+  }
 }
