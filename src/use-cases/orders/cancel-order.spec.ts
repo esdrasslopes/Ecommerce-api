@@ -8,7 +8,7 @@ import { createUser } from "@/utils/test/create-user";
 
 import { User } from "@prisma/client";
 
-import { CancelOrderError } from "./errors/cancel-order-error";
+import { CancelOrderError } from "../errors/cancel-order-error";
 
 let ordersRepository: InMemoryOrdersRepository;
 

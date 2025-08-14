@@ -2,17 +2,17 @@ import { IProductsRepository } from "@/repositories/repositories-types/products-
 
 import { Product } from "@prisma/client";
 
-import { ProductDoesNotExistError } from "./errors/product-does-not-exist-error";
+import { ProductDoesNotExistError } from "../errors/product-does-not-exist-error";
 
-interface DeleteProductUseCaseRequest {
+interface GetDetailsOfASpecificProductsUseCaseRequest {
   productId: string;
 }
 
-interface DeleteProductUseCaseResponse {
-  deletedProduct: Product;
+interface GetDetailsOfASpecificProductsUseCaseResponse {
+  product: Product;
 }
 
-export class DeleteProductUseCase {
+export class GetDetailsOfASpecificProductsUseCase {
   private productsRepository: IProductsRepository;
 
   constructor(productsRepository: IProductsRepository) {
@@ -21,17 +21,13 @@ export class DeleteProductUseCase {
 
   async execute({
     productId,
-  }: DeleteProductUseCaseRequest): Promise<DeleteProductUseCaseResponse> {
+  }: GetDetailsOfASpecificProductsUseCaseRequest): Promise<GetDetailsOfASpecificProductsUseCaseResponse> {
     const product = await this.productsRepository.findProductById(productId);
 
     if (!product) {
       throw new ProductDoesNotExistError();
     }
 
-    const deletedProduct = await this.productsRepository.deleteProductById(
-      productId
-    );
-
-    return { deletedProduct };
+    return { product };
   }
 }

@@ -2,7 +2,7 @@ import { IProductsRepository } from "@/repositories/repositories-types/products-
 
 import { Category, CategoryName } from "@prisma/client";
 
-import { ExistingCategoryError } from "./errors/existing-category-error";
+import { ExistingCategoryError } from "../errors/existing-category-error";
 
 interface CreateCategoryUseCaseRequest {
   categoryName: CategoryName;

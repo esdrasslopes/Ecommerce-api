@@ -4,7 +4,7 @@ import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-p
 
 import { CreateCategoryUseCase } from "./create-category";
 
-import { ExistingCategoryError } from "./errors/existing-category-error";
+import { ExistingCategoryError } from "../errors/existing-category-error";
 
 let categoriesRepository: InMemoryProductsRepository;
 

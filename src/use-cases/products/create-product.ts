@@ -2,9 +2,9 @@ import { IProductsRepository } from "@/repositories/repositories-types/products-
 
 import { CategoryName, Product } from "@prisma/client";
 
-import { ProductWithoutCategoryError } from "./errors/product-without-category.error";
+import { ProductWithoutCategoryError } from "../errors/product-without-category.error";
 
-import { ProductAlreadyExistError } from "./errors/product-already-exist.error";
+import { ProductAlreadyExistError } from "../errors/product-already-exist.error";
 
 interface CreateProductUseCaseRequest {
   name: string;

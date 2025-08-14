@@ -1,6 +1,6 @@
 import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-products-repository";
 
-import { CreateProductUseCase } from "@/use-cases/create-product";
+import { CreateProductUseCase } from "@/use-cases/products/create-product";
 
 export const CreateProducts = async () => {
   const productsRepository = new InMemoryProductsRepository();

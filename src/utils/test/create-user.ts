@@ -1,4 +1,4 @@
-import { RegisterUseCase } from "@/use-cases/register";
+import { RegisterUseCase } from "@/use-cases/users/register";
 
 import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users.repository";
 

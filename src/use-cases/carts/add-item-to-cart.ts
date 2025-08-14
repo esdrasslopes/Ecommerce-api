@@ -2,11 +2,11 @@ import { ICartsRepository } from "@/repositories/repositories-types/carts-reposi
 
 import { CartItem } from "@prisma/client";
 
-import { ResourceNotFoundError } from "./errors/resource-not-found-error";
+import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 
 import { IProductsRepository } from "@/repositories/repositories-types/products-repository";
 
-import { ProductWithInsufficientStockError } from "./errors/product-with-insufficient-stock-error";
+import { ProductWithInsufficientStockError } from "../errors/product-with-insufficient-stock-error";
 
 interface AddItemToCartUseCaseRequest {
   cartId: string;

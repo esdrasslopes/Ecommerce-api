@@ -73,4 +73,10 @@ export class InMemoryOrdersRepository implements IOrdersRepository {
 
     return orderToCancel;
   }
+
+  async getOrdersHistory(userId: string) {
+    const orders = this.orders.filter((orders) => orders.user_id === userId);
+
+    return orders;
+  }
 }

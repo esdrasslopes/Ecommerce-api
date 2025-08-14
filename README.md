@@ -7,16 +7,16 @@
 - [x] O usuário deve conseguir acessar os dados do seu perfil.
 - [] O usuário deve conseguir comprar um produto.
 - [x] O usuário deve conseguir adicionar um produto ao carrinho.
-- [] O usuário deve conseguir ver o seu historico de compras.
+- [x] O usuário deve conseguir ver o seu historico de compras.
 - [x] O usuário deve conseguir ver o seu carrinho.
 - [x] O usuário deve conseguir filtrar produtos a partir de sua categoria, preço ou nome.
-- [] O usuário deve conseguir ver detalhes sobre um produto em específico.
+- [x] O usuário deve conseguir ver detalhes sobre um produto em específico.
 - [] O usuário deve conseguir ver detalhes do pedido (Ex: pago, entregue).
 - [x] O usuário administrador deve conseguir adicionar itens ao sistema.
 - [x] O usuário administrador deve conseguir adicionar categorias ao sistema.
-- [] O usuário administrador deve conseguir vizualizar o histórico de pedidos.
+- [x] O usuário administrador deve conseguir vizualizar o histórico de pedidos.
 - [] O usuário administrador deve conseguir validar a situação de um produto.
-- [] O usuário deve conseguir cancelar um pedido.
+- [x] O usuário deve conseguir cancelar um pedido.
 
 ## RN
 

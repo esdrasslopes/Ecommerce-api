@@ -4,7 +4,7 @@ import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-user
 
 import { RegisterUseCase } from "./register";
 
-import { UserAlreadyExistsError } from "./errors/user-already-exists-error";
+import { UserAlreadyExistsError } from "../errors/user-already-exists-error";
 
 import { compare } from "bcrypt";
 

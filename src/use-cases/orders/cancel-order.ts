@@ -2,7 +2,7 @@ import { IOrdersRepository } from "@/repositories/repositories-types/orders-repo
 
 import { OrderWithItems } from "@/types";
 
-import { CancelOrderError } from "./errors/cancel-order-error";
+import { CancelOrderError } from "../errors/cancel-order-error";
 
 interface CancelOrderUseCaseRequest {
   orderId: string;

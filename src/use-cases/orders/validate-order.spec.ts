@@ -8,7 +8,7 @@ import { createUser } from "@/utils/test/create-user";
 
 import { User } from "@prisma/client";
 
-import { OrderDoesNotExistError } from "./errors/order-does-not-exist-error";
+import { OrderDoesNotExistError } from "../errors/order-does-not-exist-error";
 
 let ordersRepository: InMemoryOrdersRepository;
 

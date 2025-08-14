@@ -2,7 +2,7 @@ import { IUsersRepository } from "@/repositories/repositories-types/users-reposi
 
 import { User } from "@prisma/client";
 
-import { InvalidCredentialsError } from "./errors/invalid-credentials-error";
+import { InvalidCredentialsError } from "../errors/invalid-credentials-error";
 
 import { compare } from "bcrypt";
 

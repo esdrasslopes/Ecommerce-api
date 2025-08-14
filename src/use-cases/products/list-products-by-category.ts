@@ -2,7 +2,7 @@ import { IProductsRepository } from "@/repositories/repositories-types/products-
 
 import { CategoryName, Product } from "@prisma/client";
 
-import { CategoryDoesNotExistError } from "./errors/category-does-not-exist";
+import { CategoryDoesNotExistError } from "../errors/category-does-not-exist";
 
 interface ListProductsByCategoryUseCaseRequest {
   categoryName: CategoryName;

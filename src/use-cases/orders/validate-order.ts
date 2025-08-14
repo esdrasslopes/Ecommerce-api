@@ -2,7 +2,7 @@ import { IOrdersRepository } from "@/repositories/repositories-types/orders-repo
 
 import { OrderWithItems } from "@/types";
 
-import { OrderDoesNotExistError } from "./errors/order-does-not-exist-error";
+import { OrderDoesNotExistError } from "../errors/order-does-not-exist-error";
 
 interface ValidateOrderUseCaseRequest {
   orderId: string;

@@ -4,7 +4,7 @@ import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-p
 
 import { ListProductsByCategoryUseCase } from "./list-products-by-category";
 
-import { CategoryDoesNotExistError } from "./errors/category-does-not-exist";
+import { CategoryDoesNotExistError } from "../errors/category-does-not-exist";
 
 let productsRepository: InMemoryProductsRepository;
 

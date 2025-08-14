@@ -2,9 +2,9 @@ import { IProductsRepository } from "@/repositories/repositories-types/products-
 
 import { CategoryName, Product } from "@prisma/client";
 
-import { ProductDoesNotExistError } from "./errors/product-does-not-exist-error";
+import { ProductDoesNotExistError } from "../errors/product-does-not-exist-error";
 
-import { CategoryDoesNotExistError } from "./errors/category-does-not-exist";
+import { CategoryDoesNotExistError } from "../errors/category-does-not-exist";
 
 interface UpdateProductUseCaseRequest {
   name: string;

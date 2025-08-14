@@ -4,7 +4,7 @@ import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-p
 
 import { CreateProductUseCase } from "./create-product";
 
-import { ProductAlreadyExistError } from "./errors/product-already-exist.error";
+import { ProductAlreadyExistError } from "../errors/product-already-exist.error";
 
 let productsRepository: InMemoryProductsRepository;
 

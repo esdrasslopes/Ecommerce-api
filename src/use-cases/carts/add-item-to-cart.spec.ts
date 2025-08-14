@@ -10,7 +10,7 @@ import { createUser } from "@/utils/test/create-user";
 
 import { User } from "@prisma/client";
 
-import { ProductWithInsufficientStockError } from "./errors/product-with-insufficient-stock-error";
+import { ProductWithInsufficientStockError } from "../errors/product-with-insufficient-stock-error";
 
 let addItemToCartRepository: InMemoryCartsRepository;
 
