@@ -33,6 +33,17 @@ export class InMemoryCartsRepository implements ICartsRepository {
   }
 
   async addItemtoCart(cartId: string, productId: string, quantity: number) {
+    const cartItemAlreadyExists = this.cartItems.find(
+      (cartItem) =>
+        cartItem.product_id === productId && cartItem.cart_id === cartId
+    );
+
+    if (cartItemAlreadyExists) {
+      cartItemAlreadyExists.quantity += quantity;
+
+      return cartItemAlreadyExists;
+    }
+
     const cartItem: CartItem = {
       id: randomUUID(),
       cart_id: cartId,

@@ -58,6 +58,37 @@ describe("Add Item to Cart Use Case", () => {
     expect(product.stock).toEqual(1);
   });
 
+  it("should be able to add more quantity to cart item in cart", async () => {
+    const cart = await addItemToCartRepository.createCart(createdUser.id);
+
+    const category = await productsRepository.createCategory("CASUAL");
+
+    const product = await productsRepository.createProduct({
+      name: "Air force",
+      price: 500,
+      stock: 10,
+      description: "",
+      image_url: "example",
+      category_id: category.id,
+    });
+
+    await sut.execute({
+      cartId: cart.id,
+      productId: product.id,
+      quantity: 9,
+    });
+
+    const { cartItem } = await sut.execute({
+      cartId: cart.id,
+      productId: product.id,
+      quantity: 1,
+    });
+
+    expect(cartItem.quantity).toEqual(10);
+
+    expect(product.stock).toEqual(0);
+  });
+
   it("should be not able to add item to cart with insufficient stock", async () => {
     const cart = await addItemToCartRepository.createCart(createdUser.id);
 
