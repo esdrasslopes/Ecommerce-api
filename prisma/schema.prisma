@@ -98,7 +98,7 @@ model Category {
 
 model Order {
   id          String      @id @default(uuid())
-  status      OrderStatus
+  status      OrderStatus @default(PENDING)
   created_at  DateTime    @default(now())
   total_price Decimal
 
