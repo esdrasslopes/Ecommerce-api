@@ -87,4 +87,14 @@ export class InMemoryCartsRepository implements ICartsRepository {
 
     return cartItem;
   }
+
+  async findCartItemById(id: string) {
+    const cartItem = this.cartItems.find((item) => item.id === id);
+
+    if (!cartItem) {
+      return null;
+    }
+
+    return cartItem;
+  }
 }

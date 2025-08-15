@@ -4,7 +4,7 @@ import { InMemoryCartsRepository } from "@/repositories/in-memory/in-memory-cart
 
 import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-products-repository";
 
-import { DeleteCartItemUseCase } from "./delete-cart-item";
+import { GetDetailsOfASpecifCartItemUseCase } from "./get-details-of-a-specific-cart-item";
 
 import { createUser } from "@/utils/test/create-user";
 
@@ -12,23 +12,22 @@ import { User } from "@prisma/client";
 
 import { CartItemDoesNotExistError } from "../errors/cart-item-does-not-exist-error";
 
-let deleteCartItemRepository: InMemoryCartsRepository;
+let getDetailsOfASpecifCartItemRepository: InMemoryCartsRepository;
 
 let productsRepository: InMemoryProductsRepository;
 
-let sut: DeleteCartItemUseCase;
+let sut: GetDetailsOfASpecifCartItemUseCase;
 
 let createdUser: User;
 
-describe("Delete CartItem Use Case", () => {
+describe("Get Details Of A Specific Cart Item Use Case", () => {
   beforeEach(async () => {
-    deleteCartItemRepository = new InMemoryCartsRepository();
+    getDetailsOfASpecifCartItemRepository = new InMemoryCartsRepository();
 
     productsRepository = new InMemoryProductsRepository();
 
-    sut = new DeleteCartItemUseCase(
-      deleteCartItemRepository,
-      productsRepository
+    sut = new GetDetailsOfASpecifCartItemUseCase(
+      getDetailsOfASpecifCartItemRepository
     );
 
     const { user } = await createUser();
@@ -36,8 +35,10 @@ describe("Delete CartItem Use Case", () => {
     createdUser = user;
   });
 
-  it("should be able to delete item from cart", async () => {
-    const cart = await deleteCartItemRepository.createCart(createdUser.id);
+  it("should be able to get details of a specific cart items", async () => {
+    const cart = await getDetailsOfASpecifCartItemRepository.createCart(
+      createdUser.id
+    );
 
     const category = await productsRepository.createCategory("CASUAL");
 
@@ -50,33 +51,24 @@ describe("Delete CartItem Use Case", () => {
       category_id: category.id,
     });
 
-    const cartItem = await deleteCartItemRepository.addItemtoCart(
-      cart.id,
-      product.id,
-      8
-    );
+    const createdcCartItem =
+      await getDetailsOfASpecifCartItemRepository.addItemtoCart(
+        cart.id,
+        product.id,
+        9
+      );
 
-    await productsRepository.updateProductStock(
-      product.id,
-      cartItem.quantity,
-      "decrement"
-    );
-
-    const { deletedCartItem } = await sut.execute({
-      cartId: cart.id,
-      cartItemId: cartItem.id,
+    const { cartItem } = await sut.execute({
+      id: createdcCartItem.id,
     });
 
-    expect(deletedCartItem.id).toEqual(cartItem.id);
-
-    expect(product.stock).toEqual(10);
+    expect(cartItem.quantity).toEqual(9);
   });
 
-  it("should not be able to delete item from cart", async () => {
+  it("should not be able to get details of a specific cart items", async () => {
     await expect(async () => {
-      await sut.execute({
-        cartId: "",
-        cartItemId: "",
+      const { cartItem } = await sut.execute({
+        id: "",
       });
     }).rejects.toBeInstanceOf(CartItemDoesNotExistError);
   });
