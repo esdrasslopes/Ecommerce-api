@@ -73,4 +73,18 @@ export class InMemoryCartsRepository implements ICartsRepository {
 
     return cartItem;
   }
+
+  async deleteCartItem(cartId: string, cartItemId: string) {
+    const cartItem = this.cartItems.find(
+      (item) => item.cart_id === cartId && item.id === cartItemId
+    );
+
+    if (!cartItem) {
+      return null;
+    }
+
+    this.cartItems = this.cartItems.filter((item) => item.id !== cartItem.id);
+
+    return cartItem;
+  }
 }

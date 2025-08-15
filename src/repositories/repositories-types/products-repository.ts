@@ -22,6 +22,10 @@ export interface IProductsRepository {
   getProductsByName(name: string): Promise<Product[]>;
   getProductsByPrice(price: number): Promise<Product[]>;
   getAvailableProducts(): Promise<Product[]>;
-  updateProductStock(id: string, quantity: number): Promise<Product>;
+  updateProductStock(
+    id: string,
+    quantity: number,
+    operation: "increment" | "decrement"
+  ): Promise<Product>;
   deleteProductById(id: string): Promise<Product>;
 }

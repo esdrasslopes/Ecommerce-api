@@ -48,7 +48,11 @@ export class AddItemToCartUseCase {
       throw new ProductWithInsufficientStockError();
     }
 
-    await this.productsRepository.updateProductStock(productId, quantity);
+    await this.productsRepository.updateProductStock(
+      productId,
+      quantity,
+      "decrement"
+    );
 
     const cartItem = await this.addItemToCartRepository.addItemtoCart(
       cartId,

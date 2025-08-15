@@ -137,17 +137,29 @@ export class InMemoryProductsRepository implements IProductsRepository {
     return cartItems;
   }
 
-  async updateProductStock(id: string, quantity: number) {
+  async updateProductStock(
+    id: string,
+    quantity: number,
+    operation: "increment" | "decrement"
+  ) {
     const product = this.productsItems.find((product) => product.id === id);
 
     if (!product) {
       throw new ProductDoesNotExistError();
     }
 
-    product.stock -= quantity;
+    if (operation === "decrement") {
+      product.stock -= quantity;
 
-    if (product.stock === 0) {
-      product.is_available = false;
+      if (product.stock === 0) {
+        product.is_available = false;
+      }
+    } else {
+      product.stock += quantity;
+
+      if (product.stock > 0) {
+        product.is_available = true;
+      }
     }
 
     return product;

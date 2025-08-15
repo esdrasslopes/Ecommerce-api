@@ -5,7 +5,7 @@
 - [x] O usuário deve conseguir se cadastrar.
 - [x] O usuário deve conseguir se autenticar.
 - [x] O usuário deve conseguir acessar os dados do seu perfil.
-- [] O usuário deve conseguir comprar um produto.
+- [x] O usuário deve conseguir comprar um produto.
 - [x] O usuário deve conseguir adicionar um produto ao carrinho.
 - [x] O usuário deve conseguir ver o seu historico de compras.
 - [x] O usuário deve conseguir ver o seu carrinho.
