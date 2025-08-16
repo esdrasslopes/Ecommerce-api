@@ -53,6 +53,7 @@ describe("Get Order History Use Case", () => {
 
     const { orders } = await sut.execute({
       userId: createdUser.id,
+      page: 1,
     });
 
     expect(orders).toHaveLength(3);

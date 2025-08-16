@@ -56,8 +56,10 @@ export class InMemoryCartsRepository implements ICartsRepository {
     return cartItem;
   }
 
-  async getCartItemsFromCart(cartId: string) {
-    const items = this.cartItems.filter((item) => item.cart_id === cartId);
+  async getCartItemsFromCart(cartId: string, page: number) {
+    const items = this.cartItems
+      .filter((item) => item.cart_id === cartId)
+      .slice((page - 1) * 20, page * 20);
 
     return items;
   }

@@ -2,6 +2,10 @@ import { IProductsRepository } from "@/repositories/repositories-types/products-
 
 import { Product } from "@prisma/client";
 
+interface ListAllProductsAvailablesUseCaseRequest {
+  page: number;
+}
+
 interface ListAllProductsAvailablesUseCaseResponse {
   products: Product[];
 }
@@ -13,9 +17,11 @@ export class ListAllProductsAvailablesUseCase {
     this.productsRepository = productsRepository;
   }
 
-  async execute(): Promise<ListAllProductsAvailablesUseCaseResponse> {
+  async execute({
+    page,
+  }: ListAllProductsAvailablesUseCaseRequest): Promise<ListAllProductsAvailablesUseCaseResponse> {
     const productsAvailables =
-      await this.productsRepository.getAvailableProducts();
+      await this.productsRepository.getAvailableProducts(page);
 
     return { products: productsAvailables };
   }

@@ -18,10 +18,10 @@ export interface IProductsRepository {
     data: Prisma.ProductUncheckedUpdateInput,
     productToUpdate: Product
   ): Promise<Product>;
-  getProductsByCategory(categoryId: string): Promise<Product[]>;
-  getProductsByName(name: string): Promise<Product[]>;
-  getProductsByPrice(price: number): Promise<Product[]>;
-  getAvailableProducts(): Promise<Product[]>;
+  getProductsByCategory(categoryId: string, page: number): Promise<Product[]>;
+  getProductsByName(name: string, page: number): Promise<Product[]>;
+  getProductsByPrice(price: number, page: number): Promise<Product[]>;
+  getAvailableProducts(page: number): Promise<Product[]>;
   updateProductStock(
     id: string,
     quantity: number,

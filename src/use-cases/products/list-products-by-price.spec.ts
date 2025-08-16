@@ -49,6 +49,7 @@ describe("List Products By Price Use Case", () => {
 
     const { productsByPrice } = await sut.execute({
       price: 400,
+      page: 1,
     });
 
     expect(productsByPrice).toHaveLength(2);

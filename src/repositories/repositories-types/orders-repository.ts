@@ -9,6 +9,6 @@ export interface IOrdersRepository {
   ): Promise<OrderItem>;
   validateOrder(orderId: string): Promise<OrderWithItems | null>;
   cancelOrder(orderId: string): Promise<OrderWithItems | null>;
-  getOrdersHistory(userId: string): Promise<OrderWithItems[]>;
+  getOrdersHistory(userId: string, page: number): Promise<OrderWithItems[]>;
   getDetailsOfASpecificOrder(orderId: string): Promise<OrderWithItems | null>;
 }

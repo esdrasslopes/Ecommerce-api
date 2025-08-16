@@ -39,8 +39,32 @@ describe("List Products Availables Use Case", () => {
       category_id: sportCategory.id,
     });
 
-    const { products } = await sut.execute();
+    const { products } = await sut.execute({
+      page: 1,
+    });
 
     expect(products).toHaveLength(1);
+  });
+
+  it("should be able to list products availables in page 2", async () => {
+    const casualCategory = await productsRepository.createCategory("CASUAL");
+
+    for (let i = 1; i <= 22; i++) {
+      await productsRepository.createProduct({
+        name: `Air Force ${i}`,
+        price: 400,
+        stock: i,
+        description: "Tênis nike air force branco",
+        image_url: "example.com",
+        category_id: casualCategory.id,
+        is_available: true,
+      });
+    }
+
+    const { products } = await sut.execute({
+      page: 2,
+    });
+
+    expect(products).toHaveLength(2);
   });
 });

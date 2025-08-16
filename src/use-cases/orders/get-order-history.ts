@@ -4,6 +4,7 @@ import { OrderWithItems } from "@/types";
 
 interface GetOrderHistoryUseCaseRequest {
   userId: string;
+  page: number;
 }
 
 interface GetOrderHistoryUseCaseResponse {
@@ -19,8 +20,9 @@ export class GetOrderHistoryUseCase {
 
   async execute({
     userId,
+    page,
   }: GetOrderHistoryUseCaseRequest): Promise<GetOrderHistoryUseCaseResponse> {
-    const orders = await this.ordersRepository.getOrdersHistory(userId);
+    const orders = await this.ordersRepository.getOrdersHistory(userId, page);
 
     return { orders };
   }

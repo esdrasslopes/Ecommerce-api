@@ -6,6 +6,7 @@ import { CartItems } from "@/types";
 
 interface GetItemsFromCartUseCaseRequest {
   cartId: string;
+  page: number;
 }
 
 interface GetItemsFromCartUseCaseResponse {
@@ -28,9 +29,10 @@ export class GetItemsFromCartUseCase {
 
   async execute({
     cartId,
+    page,
   }: GetItemsFromCartUseCaseRequest): Promise<GetItemsFromCartUseCaseResponse> {
     const cartItems =
-      await this.getItemsFromCartRepository.getCartItemsFromCart(cartId);
+      await this.getItemsFromCartRepository.getCartItemsFromCart(cartId, page);
 
     const cartItemsIds = cartItems.map((item) => item.product_id);
 

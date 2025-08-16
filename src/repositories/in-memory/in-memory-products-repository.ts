@@ -95,28 +95,30 @@ export class InMemoryProductsRepository implements IProductsRepository {
     return productToUpdate;
   }
 
-  async getProductsByCategory(categoryId: string) {
-    const products = this.productsItems.filter(
-      (product) => product.category_id === categoryId
-    );
+  async getProductsByCategory(categoryId: string, page: number) {
+    const products = this.productsItems
+      .filter((product) => product.category_id === categoryId)
+      .slice((page - 1) * 20, page * 20);
 
     return products;
   }
 
-  async getProductsByName(name: string) {
+  async getProductsByName(name: string, page: number) {
     const productName = name.toLowerCase();
 
-    const products = this.productsItems.filter((product) => {
-      return product.name.toLowerCase().includes(productName);
-    });
+    const products = this.productsItems
+      .filter((product) => {
+        return product.name.toLowerCase().includes(productName);
+      })
+      .slice((page - 1) * 20, page * 20);
 
     return products;
   }
 
-  async getProductsByPrice(price: number) {
-    const products = this.productsItems.filter(
-      (product) => Number(product.price) === price
-    );
+  async getProductsByPrice(price: number, page: number) {
+    const products = this.productsItems
+      .filter((product) => Number(product.price) === price)
+      .slice((page - 1) * 20, page * 20);
 
     return products;
   }
@@ -165,10 +167,10 @@ export class InMemoryProductsRepository implements IProductsRepository {
     return product;
   }
 
-  async getAvailableProducts() {
-    const productsAvailables = this.productsItems.filter(
-      (item) => item.is_available === true
-    );
+  async getAvailableProducts(page: number) {
+    const productsAvailables = this.productsItems
+      .filter((item) => item.is_available === true)
+      .slice((page - 1) * 20, page * 20);
 
     return productsAvailables;
   }

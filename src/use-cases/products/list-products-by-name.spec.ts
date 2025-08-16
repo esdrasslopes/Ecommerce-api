@@ -40,6 +40,7 @@ describe("List Products By Name Use Case", () => {
 
     const { productsByName } = await sut.execute({
       productName: "Air force",
+      page: 1,
     });
 
     expect(productsByName).toHaveLength(2);

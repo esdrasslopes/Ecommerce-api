@@ -6,6 +6,7 @@ import { CategoryDoesNotExistError } from "../errors/category-does-not-exist";
 
 interface ListProductsByCategoryUseCaseRequest {
   categoryName: CategoryName;
+  page: number;
 }
 
 interface ListProductsByCategoryUseCaseResponse {
@@ -21,6 +22,7 @@ export class ListProductsByCategoryUseCase {
 
   async execute({
     categoryName,
+    page,
   }: ListProductsByCategoryUseCaseRequest): Promise<ListProductsByCategoryUseCaseResponse> {
     const category =
       await this.listProductsRepository.findCategoryByCategoryName(
@@ -32,7 +34,10 @@ export class ListProductsByCategoryUseCase {
     }
 
     const productsByCategory =
-      await this.listProductsRepository.getProductsByCategory(category.id);
+      await this.listProductsRepository.getProductsByCategory(
+        category.id,
+        page
+      );
 
     return { productsByCategory };
   }

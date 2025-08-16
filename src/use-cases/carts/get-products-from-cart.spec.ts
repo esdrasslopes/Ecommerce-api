@@ -52,6 +52,7 @@ describe("Get Products From Cart Use Case", () => {
 
     const { cartItems } = await sut.execute({
       cartId: cart.id,
+      page: 1,
     });
 
     expect(cartItems).toHaveLength(1);

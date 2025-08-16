@@ -14,7 +14,7 @@ export const createCartAndCartItems = async (
     await cartRepository.addItemtoCart(cart.id, product.id, 10);
   }
 
-  const itemsFromCart = await cartRepository.getCartItemsFromCart(cart.id);
+  const itemsFromCart = await cartRepository.getCartItemsFromCart(cart.id, 1);
 
   return itemsFromCart;
 };

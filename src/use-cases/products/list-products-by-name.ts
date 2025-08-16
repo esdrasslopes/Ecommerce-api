@@ -4,6 +4,7 @@ import { Product } from "@prisma/client";
 
 interface ListProductsByNameUseCaseRequest {
   productName: string;
+  page: number;
 }
 
 interface ListProductsByNameUseCaseResponse {
@@ -19,9 +20,13 @@ export class ListProductsByNameUseCase {
 
   async execute({
     productName,
+    page,
   }: ListProductsByNameUseCaseRequest): Promise<ListProductsByNameUseCaseResponse> {
     const productsByName =
-      await this.listProductsByNameRepository.getProductsByName(productName);
+      await this.listProductsByNameRepository.getProductsByName(
+        productName,
+        page
+      );
 
     return { productsByName };
   }

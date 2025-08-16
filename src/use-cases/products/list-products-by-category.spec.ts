@@ -51,6 +51,7 @@ describe("List Products By Category Use Case", () => {
 
     const { productsByCategory } = await sut.execute({
       categoryName: "SPORT",
+      page: 1,
     });
 
     expect(productsByCategory).toHaveLength(2);
@@ -69,6 +70,7 @@ describe("List Products By Category Use Case", () => {
     await expect(async () => {
       await sut.execute({
         categoryName: "SPORT",
+        page: 1,
       });
     }).rejects.toBeInstanceOf(CategoryDoesNotExistError);
   });
