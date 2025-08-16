@@ -18,42 +18,46 @@ describe("Update Product Use Case", () => {
   });
 
   it("should be able to update product", async () => {
-    const casualCategory = await productsRepository.createCategory("CASUAL");
+    const classicCategory = await productsRepository.createCategory("CLASSICS");
 
-    const sportCategory = await productsRepository.createCategory("SPORT");
+    const biographyCategory = await productsRepository.createCategory(
+      "BIOGRAPHY"
+    );
 
     const product = await productsRepository.createProduct({
-      name: "Air force",
+      category_id: classicCategory.id,
+      name: "Unknown",
       price: 400,
       stock: 10,
-      description: "Tênis nike air force branco",
+      description: "Livro desconhecido",
       image_url: "example.com",
-      category_id: casualCategory.id,
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     const { updatedProduct } = await sut.execute(
       {
-        name: "Air",
+        name: "Updated Book",
         price: 450,
-        categoryName: "SPORT",
+        categoryName: "BIOGRAPHY",
       },
       product.id
     );
 
     expect(updatedProduct.price).toEqual(450);
 
-    expect(updatedProduct.category_id).toEqual(sportCategory.id);
+    expect(updatedProduct.category_id).toEqual(biographyCategory.id);
   });
 
   it("should not be able to update product", async () => {
-    await productsRepository.createCategory("SPORT");
+    await productsRepository.createCategory("CLASSICS");
 
     await expect(async () => {
       await sut.execute(
         {
-          name: "Air",
+          name: "Unknown",
           price: 450,
-          categoryName: "SPORT",
+          categoryName: "CLASSICS",
         },
         ""
       );

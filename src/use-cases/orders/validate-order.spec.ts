@@ -4,7 +4,7 @@ import { InMemoryOrdersRepository } from "@/repositories/in-memory/in-memory-ord
 
 import { ValidateOrderUseCase } from "./validate-order";
 
-import { createUser } from "@/utils/test/create-user";
+import { createUser } from "@/utils/test-in-memory/create-user";
 
 import { User } from "@prisma/client";
 

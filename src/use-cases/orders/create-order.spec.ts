@@ -4,13 +4,13 @@ import { InMemoryOrdersRepository } from "@/repositories/in-memory/in-memory-ord
 
 import { CreateOrderUseCase } from "./create-order";
 
-import { createUser } from "@/utils/test/create-user";
+import { createUser } from "@/utils/test-in-memory/create-user";
 
 import { User } from "@prisma/client";
 
 import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-products-repository";
 
-import { createCartAndCartItems } from "@/utils/test/create-cart-and-cart-items";
+import { createCartAndCartItems } from "@/utils/test-in-memory/create-cart-and-cart-items";
 
 let ordersRepository: InMemoryOrdersRepository;
 
@@ -34,24 +34,28 @@ describe("Create Order Use Case", () => {
   });
 
   it("should be able to create an order", async () => {
-    const category = await productsRepository.createCategory("CASUAL");
+    const category = await productsRepository.createCategory("BIOGRAPHY");
 
     const firstProduct = await productsRepository.createProduct({
-      name: "Air force",
-      price: 500,
-      stock: 10,
-      description: "",
-      image_url: "example",
       category_id: category.id,
+      name: "Unknown",
+      price: 400,
+      stock: 10,
+      description: "Livro desconhecido",
+      image_url: "example.com",
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     const secondProduct = await productsRepository.createProduct({
-      name: "Air force",
-      price: 500,
-      stock: 10,
-      description: "",
-      image_url: "example",
       category_id: category.id,
+      name: "Unknown",
+      price: 400,
+      stock: 10,
+      description: "Livro desconhecido",
+      image_url: "example.com",
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     const cartItems = await createCartAndCartItems(

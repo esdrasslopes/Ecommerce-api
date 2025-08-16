@@ -16,35 +16,32 @@ describe("List Products By Price Use Case", () => {
   });
 
   it("should be able to list products by price", async () => {
-    const casualCategory = await productsRepository.createCategory("CASUAL");
+    const classicCategory = await productsRepository.createCategory("CLASSICS");
 
-    const sportCategory = await productsRepository.createCategory("SPORT");
+    const biographyCategory = await productsRepository.createCategory(
+      "BIOGRAPHY"
+    );
 
     await productsRepository.createProduct({
-      name: "Air force Branco",
+      category_id: classicCategory.id,
+      name: "Unknown",
       price: 400,
       stock: 10,
-      description: "Tênis nike air force branco",
+      description: "Livro desconhecido",
       image_url: "example.com",
-      category_id: casualCategory.id,
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     await productsRepository.createProduct({
-      name: "Air force Preto",
+      category_id: biographyCategory.id,
+      name: "Biography Book",
       price: 400,
       stock: 10,
-      description: "Tênis nike air force branco",
+      description: "Livro desconhecido",
       image_url: "example.com",
-      category_id: sportCategory.id,
-    });
-
-    await productsRepository.createProduct({
-      name: "Air force Marrom",
-      price: 450,
-      stock: 10,
-      description: "Tênis nike air force branco",
-      image_url: "example.com",
-      category_id: sportCategory.id,
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     const { productsByPrice } = await sut.execute({

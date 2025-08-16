@@ -1,6 +1,6 @@
 import { IOrdersRepository } from "@/repositories/repositories-types/orders-repository";
 
-import { OrderWithItems } from "@/types";
+import { IOrders } from "@/types";
 
 interface GetOrderHistoryUseCaseRequest {
   userId: string;
@@ -8,7 +8,7 @@ interface GetOrderHistoryUseCaseRequest {
 }
 
 interface GetOrderHistoryUseCaseResponse {
-  orders: OrderWithItems[];
+  orders: IOrders[];
 }
 
 export class GetOrderHistoryUseCase {
@@ -24,6 +24,16 @@ export class GetOrderHistoryUseCase {
   }: GetOrderHistoryUseCaseRequest): Promise<GetOrderHistoryUseCaseResponse> {
     const orders = await this.ordersRepository.getOrdersHistory(userId, page);
 
-    return { orders };
+    const ordersHistory: IOrders[] = orders.map((order) => {
+      return {
+        id: order.id,
+        status: order.status,
+        created_at: new Date(order.created_at),
+        total_price: Number(order.total_price),
+        items: order.items?.length ?? 0,
+      };
+    });
+
+    return { orders: ordersHistory };
   }
 }

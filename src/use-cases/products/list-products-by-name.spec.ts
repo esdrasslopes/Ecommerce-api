@@ -16,30 +16,47 @@ describe("List Products By Name Use Case", () => {
   });
 
   it("should be able to list products by name", async () => {
-    const casualCategory = await productsRepository.createCategory("CASUAL");
+    const classicCategory = await productsRepository.createCategory("CLASSICS");
 
-    const sportCategory = await productsRepository.createCategory("SPORT");
+    const biographyCategory = await productsRepository.createCategory(
+      "BIOGRAPHY"
+    );
 
     await productsRepository.createProduct({
-      name: "Air force Branco",
+      category_id: classicCategory.id,
+      name: "Unknown",
       price: 400,
       stock: 10,
-      description: "Tênis nike air force branco",
+      description: "Livro desconhecido",
       image_url: "example.com",
-      category_id: casualCategory.id,
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     await productsRepository.createProduct({
-      name: "Air force Preto",
+      category_id: biographyCategory.id,
+      name: "Biography Book",
       price: 400,
       stock: 10,
-      description: "Tênis nike air force branco",
+      description: "Livro desconhecido",
       image_url: "example.com",
-      category_id: sportCategory.id,
+      author: "John Doe",
+      publisher: "Unknown",
+    });
+
+    await productsRepository.createProduct({
+      category_id: biographyCategory.id,
+      name: "Biography Book",
+      price: 400,
+      stock: 10,
+      description: "Livro desconhecido",
+      image_url: "example.com",
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     const { productsByName } = await sut.execute({
-      productName: "Air force",
+      productName: "Biography",
       page: 1,
     });
 

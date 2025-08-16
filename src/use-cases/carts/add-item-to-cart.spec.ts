@@ -6,7 +6,7 @@ import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-p
 
 import { AddItemToCartUseCase } from "./add-item-to-cart";
 
-import { createUser } from "@/utils/test/create-user";
+import { createUser } from "@/utils/test-in-memory/create-user";
 
 import { User } from "@prisma/client";
 
@@ -36,15 +36,17 @@ describe("Add Item to Cart Use Case", () => {
   it("should be able to add item to cart", async () => {
     const cart = await addItemToCartRepository.createCart(createdUser.id);
 
-    const category = await productsRepository.createCategory("CASUAL");
+    const category = await productsRepository.createCategory("CLASSICS");
 
     const product = await productsRepository.createProduct({
-      name: "Air force",
-      price: 500,
-      stock: 10,
-      description: "",
-      image_url: "example",
       category_id: category.id,
+      name: "Unknown",
+      price: 400,
+      stock: 10,
+      description: "Livro desconhecido",
+      image_url: "example.com",
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     const { cartItem } = await sut.execute({
@@ -61,15 +63,17 @@ describe("Add Item to Cart Use Case", () => {
   it("should be able to add more quantity to cart item in cart", async () => {
     const cart = await addItemToCartRepository.createCart(createdUser.id);
 
-    const category = await productsRepository.createCategory("CASUAL");
+    const category = await productsRepository.createCategory("CLASSICS");
 
     const product = await productsRepository.createProduct({
-      name: "Air force",
-      price: 500,
-      stock: 10,
-      description: "",
-      image_url: "example",
       category_id: category.id,
+      name: "Unknown",
+      price: 400,
+      stock: 10,
+      description: "Livro desconhecido",
+      image_url: "example.com",
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     await sut.execute({
@@ -92,15 +96,17 @@ describe("Add Item to Cart Use Case", () => {
   it("should be not able to add item to cart with insufficient stock", async () => {
     const cart = await addItemToCartRepository.createCart(createdUser.id);
 
-    const category = await productsRepository.createCategory("CASUAL");
+    const category = await productsRepository.createCategory("CLASSICS");
 
     const product = await productsRepository.createProduct({
-      name: "Air force",
-      price: 500,
-      stock: 0,
-      description: "",
-      image_url: "example",
       category_id: category.id,
+      name: "Unknown",
+      price: 400,
+      stock: 0,
+      description: "Livro desconhecido",
+      image_url: "example.com",
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     await expect(async () => {

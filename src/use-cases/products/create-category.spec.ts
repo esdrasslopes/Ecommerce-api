@@ -19,20 +19,20 @@ describe("Create Category Use Case", () => {
 
   it("should be able to create a new category", async () => {
     const { category } = await sut.execute({
-      categoryName: "CASUAL",
+      categoryName: "BIOGRAPHY",
     });
 
-    expect(category.name).toEqual("CASUAL");
+    expect(category.name).toEqual("BIOGRAPHY");
   });
 
   it("should not be able to create a category with same name", async () => {
     await sut.execute({
-      categoryName: "CASUAL",
+      categoryName: "BIOGRAPHY",
     });
 
     await expect(async () => {
       await sut.execute({
-        categoryName: "CASUAL",
+        categoryName: "BIOGRAPHY",
       });
     }).rejects.toBeInstanceOf(ExistingCategoryError);
   });

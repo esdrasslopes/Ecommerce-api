@@ -8,8 +8,6 @@ import { IProductsRepository } from "@/repositories/repositories-types/products-
 
 import { ProductWithInsufficientStockError } from "../errors/product-with-insufficient-stock-error";
 
-import { ProductDoesNotExistError } from "../errors/product-does-not-exist-error";
-
 interface AddItemToCartUseCaseRequest {
   cartId: string;
   productId: string;

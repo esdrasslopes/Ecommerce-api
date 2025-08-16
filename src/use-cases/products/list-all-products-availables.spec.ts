@@ -16,27 +16,33 @@ describe("List Products Availables Use Case", () => {
   });
 
   it("should be able to list products availables", async () => {
-    const casualCategory = await productsRepository.createCategory("CASUAL");
+    const classicCategory = await productsRepository.createCategory("CLASSICS");
 
-    const sportCategory = await productsRepository.createCategory("SPORT");
+    const biographyCategory = await productsRepository.createCategory(
+      "BIOGRAPHY"
+    );
 
     await productsRepository.createProduct({
-      name: "Air force Branco",
+      category_id: classicCategory.id,
+      name: "Unknown",
       price: 400,
-      stock: 0,
-      description: "Tênis nike air force branco",
+      stock: 10,
+      description: "Livro desconhecido",
       image_url: "example.com",
-      category_id: casualCategory.id,
-      is_available: false,
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     await productsRepository.createProduct({
-      name: "Air force Preto",
+      category_id: biographyCategory.id,
+      name: "Unknown Biography Book",
       price: 400,
       stock: 10,
-      description: "Tênis nike air force branco",
+      description: "Livro desconhecido",
       image_url: "example.com",
-      category_id: sportCategory.id,
+      author: "John Doe",
+      publisher: "Unknown",
+      is_available: false,
     });
 
     const { products } = await sut.execute({
@@ -47,17 +53,18 @@ describe("List Products Availables Use Case", () => {
   });
 
   it("should be able to list products availables in page 2", async () => {
-    const casualCategory = await productsRepository.createCategory("CASUAL");
+    const classicCategory = await productsRepository.createCategory("CLASSICS");
 
     for (let i = 1; i <= 22; i++) {
       await productsRepository.createProduct({
-        name: `Air Force ${i}`,
+        category_id: classicCategory.id,
+        name: "Unknown",
         price: 400,
-        stock: i,
-        description: "Tênis nike air force branco",
+        stock: 10,
+        description: "Livro desconhecido",
         image_url: "example.com",
-        category_id: casualCategory.id,
-        is_available: true,
+        author: "John Doe",
+        publisher: "Unknown",
       });
     }
 

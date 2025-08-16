@@ -4,13 +4,28 @@ import fastifyJwt from "@fastify/jwt";
 
 import cookies from "@fastify/cookie";
 
+import multipart from "@fastify/multipart";
+
+import fastifyStatic from "@fastify/static";
+
+import path from "path";
+
 import { ZodError } from "zod";
 
 import { env } from "./env";
 
 import { usersRoutes } from "./http/controllers/users/routes";
 
+import { productsRoutes } from "./http/controllers/products/routes";
+
 export const app = fastify();
+
+app.register(fastifyStatic, {
+  root: path.resolve("public"),
+  prefix: "/public/",
+});
+
+app.register(multipart);
 
 app.register(cookies);
 
@@ -26,6 +41,10 @@ app.register(fastifyJwt, {
 });
 
 app.register(usersRoutes);
+
+app.register(productsRoutes, {
+  prefix: "/products",
+});
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {

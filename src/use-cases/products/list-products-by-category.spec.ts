@@ -18,39 +18,47 @@ describe("List Products By Category Use Case", () => {
   });
 
   it("should be able to list products by a specific category", async () => {
-    const casualCategory = await productsRepository.createCategory("CASUAL");
+    const classicCategory = await productsRepository.createCategory("CLASSICS");
 
-    const sportCategory = await productsRepository.createCategory("SPORT");
+    const biographyCategory = await productsRepository.createCategory(
+      "BIOGRAPHY"
+    );
 
     await productsRepository.createProduct({
-      name: "Air force",
+      category_id: biographyCategory.id,
+      name: "Unknown Biography Book",
       price: 400,
       stock: 10,
-      description: "Tênis nike air force branco",
+      description: "Livro desconhecido",
       image_url: "example.com",
-      category_id: casualCategory.id,
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     await productsRepository.createProduct({
-      name: "Air force",
+      category_id: classicCategory.id,
+      name: "Unknown",
       price: 400,
       stock: 10,
-      description: "Tênis nike air force branco",
+      description: "Livro desconhecido",
       image_url: "example.com",
-      category_id: sportCategory.id,
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     await productsRepository.createProduct({
-      name: "Air force",
+      category_id: classicCategory.id,
+      name: "Unknown",
       price: 400,
       stock: 10,
-      description: "Tênis nike air force branco",
+      description: "Livro desconhecido",
       image_url: "example.com",
-      category_id: sportCategory.id,
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     const { productsByCategory } = await sut.execute({
-      categoryName: "SPORT",
+      categoryName: "CLASSICS",
       page: 1,
     });
 
@@ -59,17 +67,19 @@ describe("List Products By Category Use Case", () => {
 
   it("should not be able to list products by a specific category", async () => {
     await productsRepository.createProduct({
-      name: "Air force",
+      category_id: "",
+      name: "Unknown",
       price: 400,
       stock: 10,
-      description: "Tênis nike air force branco",
+      description: "Livro desconhecido",
       image_url: "example.com",
-      category_id: "",
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     await expect(async () => {
       await sut.execute({
-        categoryName: "SPORT",
+        categoryName: "CLASSICS",
         page: 1,
       });
     }).rejects.toBeInstanceOf(CategoryDoesNotExistError);

@@ -4,7 +4,7 @@ import { InMemoryOrdersRepository } from "@/repositories/in-memory/in-memory-ord
 
 import { GetOrderHistoryUseCase } from "./get-order-history";
 
-import { createUser } from "@/utils/test/create-user";
+import { createUser } from "@/utils/test-in-memory/create-user";
 
 import { User } from "@prisma/client";
 
@@ -56,10 +56,6 @@ describe("Get Order History Use Case", () => {
       page: 1,
     });
 
-    console.log(orders[0]);
-
     expect(orders).toHaveLength(3);
-
-    expect(order.items).toHaveLength(1);
   });
 });

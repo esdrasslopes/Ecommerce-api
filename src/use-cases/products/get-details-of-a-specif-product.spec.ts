@@ -16,15 +16,17 @@ describe("Get Details Of A Specif Product Use Case", () => {
   });
 
   it("should be able to get details of a specif product", async () => {
-    const casualCategory = await productsRepository.createCategory("CASUAL");
+    const classicCategory = await productsRepository.createCategory("CLASSICS");
 
     const createdProduct = await productsRepository.createProduct({
-      name: "Air force",
+      category_id: classicCategory.id,
+      name: "Unknown",
       price: 400,
       stock: 10,
-      description: "Tênis nike air force branco",
+      description: "Livro desconhecido",
       image_url: "example.com",
-      category_id: casualCategory.id,
+      author: "John Doe",
+      publisher: "Unknown",
     });
 
     const { product } = await sut.execute({

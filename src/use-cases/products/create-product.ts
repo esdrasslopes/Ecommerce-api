@@ -12,6 +12,8 @@ interface CreateProductUseCaseRequest {
   price: number;
   stock: number;
   image_url?: string;
+  author: string;
+  publisher: string;
   categoryName: CategoryName;
 }
 
@@ -33,6 +35,8 @@ export class CreateProductUseCase {
     price,
     stock,
     image_url,
+    author,
+    publisher,
   }: CreateProductUseCaseRequest): Promise<CreateProductUseCaseResponse> {
     const category =
       await this.createProductRepository.findCategoryByCategoryName(
@@ -60,6 +64,8 @@ export class CreateProductUseCase {
       stock,
       image_url,
       category_id: category.id,
+      author,
+      publisher,
     });
 
     return { product };

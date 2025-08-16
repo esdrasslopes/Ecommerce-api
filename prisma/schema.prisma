@@ -19,13 +19,22 @@ enum Role {
 }
 
 enum CategoryName {
-  CASUAL
-  SPORT
-  RUNNING
-  WALKING
-  SKATE
-  RETRO
-  PLATFORM
+  FICTION
+  NONFICTION
+  FANTASY
+  SCIENCE
+  HISTORY
+  BIOGRAPHY
+  SCIFI
+  MYSTERY
+  THRILLER
+  ROMANCE
+  CHILDREN
+  YOUNG_ADULT
+  SELF_HELP
+  POETRY
+  CLASSICS
+  COOKING
 }
 
 enum OrderStatus {
@@ -54,6 +63,8 @@ model Product {
   price        Decimal
   stock        Int
   image_url    String?
+  author       String
+  publisher    String
   is_available Boolean  @default(true)
   created_at   DateTime @default(now())
   updated_at   DateTime @updatedAt

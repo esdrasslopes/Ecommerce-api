@@ -2,11 +2,11 @@ import { Prisma, Product, Category, CategoryName } from "@prisma/client";
 
 import { IProductsRepository } from "../repositories-types/products-repository";
 
-import { updateEntity } from "@/utils/uptade-entity";
+import { updateEntity } from "@/utils/in-memory/uptade-entity";
 
 import { randomUUID } from "crypto";
 
-import { unwrapAll } from "@/utils/unwrap-value";
+import { unwrapAll } from "@/utils/in-memory/unwrap-value";
 
 import { ProductDoesNotExistError } from "@/use-cases/errors/product-does-not-exist-error";
 
