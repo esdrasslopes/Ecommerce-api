@@ -1,4 +1,4 @@
-import { Order, OrderItem } from "@prisma/client";
+import { CategoryName, Order, OrderItem } from "@prisma/client";
 
 import { OrderStatus } from "@prisma/client";
 
@@ -44,11 +44,6 @@ export const profileBodySchema = z.object({
   id: z.string().uuid(),
 });
 
-export const createProductBodySchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  price: z.coerce.number(),
-  stock: z.coerce.number(),
-  is_available: z.boolean(),
-  category_id: z.string(),
+export const categoryBodySchema = z.object({
+  name: z.enum(Object.values(CategoryName)),
 });
