@@ -8,6 +8,8 @@ import { IProductsRepository } from "@/repositories/repositories-types/products-
 
 import { ProductWithInsufficientStockError } from "../errors/product-with-insufficient-stock-error";
 
+import { ProductDoesNotExistError } from "../errors/product-does-not-exist-error";
+
 interface AddItemToCartUseCaseRequest {
   cartId: string;
   productId: string;
@@ -48,17 +50,31 @@ export class AddItemToCartUseCase {
       throw new ProductWithInsufficientStockError();
     }
 
-    await this.productsRepository.updateProductStock(
-      productId,
-      quantity,
-      "decrement"
+    const existingCartItem = await this.addItemToCartRepository.findCartItem(
+      cartId,
+      productId
     );
 
-    const cartItem = await this.addItemToCartRepository.addItemtoCart(
-      cartId,
+    const oldQuantity = existingCartItem ? existingCartItem.quantity : 0;
+
+    const newQuantity = quantity + oldQuantity;
+
+    await this.productsRepository.updateProductStock(
       productId,
-      quantity
+      newQuantity,
+      oldQuantity
     );
+
+    const cartItem = existingCartItem
+      ? await this.addItemToCartRepository.updateCartItemQuantity(
+          existingCartItem.id,
+          newQuantity
+        )
+      : await this.addItemToCartRepository.addItemtoCart(
+          cartId,
+          productId,
+          quantity
+        );
 
     return { cartItem };
   }

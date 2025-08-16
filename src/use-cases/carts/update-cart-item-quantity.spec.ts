@@ -24,7 +24,10 @@ describe("Add Item to Cart Use Case", () => {
 
     productsRepository = new InMemoryProductsRepository();
 
-    sut = new UpdateCartItemQuantityUseCase(updateCartItemRepository);
+    sut = new UpdateCartItemQuantityUseCase(
+      updateCartItemRepository,
+      productsRepository
+    );
 
     const { user } = await createUser();
 
@@ -53,7 +56,7 @@ describe("Add Item to Cart Use Case", () => {
 
     const { cartItem } = await sut.execute({
       cartItemId: createdCartItem.id,
-      quantity: 2,
+      newQuantity: 2,
     });
 
     expect(cartItem.quantity).toEqual(2);

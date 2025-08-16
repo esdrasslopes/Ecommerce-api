@@ -15,7 +15,7 @@ export interface IProductsRepository {
   findProductById(productId: string): Promise<Product | null>;
   findManyByIds(productsIds: string[]): Promise<CartItems[]>;
   updateProduct(
-    data: Prisma.ProductUncheckedUpdateInput,
+    data: Prisma.ProductUpdateInput,
     productToUpdate: Product
   ): Promise<Product>;
   getProductsByCategory(categoryId: string, page: number): Promise<Product[]>;
@@ -24,8 +24,8 @@ export interface IProductsRepository {
   getAvailableProducts(page: number): Promise<Product[]>;
   updateProductStock(
     id: string,
-    quantity: number,
-    operation: "increment" | "decrement"
+    newQuantity: number,
+    oldQuantity: number
   ): Promise<Product>;
   deleteProductById(id: string): Promise<Product>;
 }

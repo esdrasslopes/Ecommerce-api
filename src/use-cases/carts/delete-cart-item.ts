@@ -43,8 +43,8 @@ export class DeleteCartItemUseCase {
 
     await this.productsRepository.updateProductStock(
       deletedCartItem.product_id,
-      deletedCartItem.quantity,
-      "increment"
+      0,
+      deletedCartItem.quantity
     );
 
     return { deletedCartItem };

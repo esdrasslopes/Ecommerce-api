@@ -59,7 +59,7 @@ describe("Delete CartItem Use Case", () => {
     await productsRepository.updateProductStock(
       product.id,
       cartItem.quantity,
-      "decrement"
+      0
     );
 
     const { deletedCartItem } = await sut.execute({

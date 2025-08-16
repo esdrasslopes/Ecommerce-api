@@ -33,17 +33,6 @@ export class InMemoryCartsRepository implements ICartsRepository {
   }
 
   async addItemtoCart(cartId: string, productId: string, quantity: number) {
-    const cartItemAlreadyExists = this.cartItems.find(
-      (cartItem) =>
-        cartItem.product_id === productId && cartItem.cart_id === cartId
-    );
-
-    if (cartItemAlreadyExists) {
-      cartItemAlreadyExists.quantity += quantity;
-
-      return cartItemAlreadyExists;
-    }
-
     const cartItem: CartItem = {
       id: randomUUID(),
       cart_id: cartId,
@@ -92,6 +81,18 @@ export class InMemoryCartsRepository implements ICartsRepository {
 
   async findCartItemById(id: string) {
     const cartItem = this.cartItems.find((item) => item.id === id);
+
+    if (!cartItem) {
+      return null;
+    }
+
+    return cartItem;
+  }
+
+  async findCartItem(cartId: string, productId: string) {
+    const cartItem = this.cartItems.find(
+      (item) => item.cart_id === cartId && item.product_id === productId
+    );
 
     if (!cartItem) {
       return null;

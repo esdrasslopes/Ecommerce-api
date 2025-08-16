@@ -12,6 +12,7 @@ export interface CartItems {
   id: string;
   name: string;
   price: number;
+  image_url: string;
 }
 
 export type OrderWithItems = Order & {

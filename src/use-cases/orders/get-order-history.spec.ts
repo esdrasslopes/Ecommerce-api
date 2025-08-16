@@ -56,6 +56,8 @@ describe("Get Order History Use Case", () => {
       page: 1,
     });
 
+    console.log(orders[0]);
+
     expect(orders).toHaveLength(3);
 
     expect(order.items).toHaveLength(1);

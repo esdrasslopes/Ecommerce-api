@@ -133,6 +133,7 @@ export class InMemoryProductsRepository implements IProductsRepository {
         name: item.name,
         price: Number(item.price),
         id: item.id,
+        image_url: item.image_url ?? "",
       };
     });
 
@@ -141,28 +142,22 @@ export class InMemoryProductsRepository implements IProductsRepository {
 
   async updateProductStock(
     id: string,
-    quantity: number,
-    operation: "increment" | "decrement"
+    newQuantity: number,
+    oldQuantity: number
   ) {
-    const product = this.productsItems.find((product) => product.id === id);
+    const product = this.productsItems.find((p) => p.id === id);
 
-    if (!product) {
-      throw new ProductDoesNotExistError();
+    if (!product) throw new ProductDoesNotExistError();
+
+    const difference = newQuantity - oldQuantity;
+
+    if (difference > 0) {
+      product.stock -= difference;
+    } else if (difference < 0) {
+      product.stock += Math.abs(difference);
     }
 
-    if (operation === "decrement") {
-      product.stock -= quantity;
-
-      if (product.stock === 0) {
-        product.is_available = false;
-      }
-    } else {
-      product.stock += quantity;
-
-      if (product.stock > 0) {
-        product.is_available = true;
-      }
-    }
+    product.is_available = product.stock > 0;
 
     return product;
   }

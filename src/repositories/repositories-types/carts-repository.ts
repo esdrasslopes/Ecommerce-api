@@ -12,4 +12,5 @@ export interface ICartsRepository {
   updateCartItemQuantity(id: string, quantity: number): Promise<CartItem>;
   deleteCartItem(cartId: string, cartItemId: string): Promise<CartItem | null>;
   findCartItemById(id: string): Promise<CartItem | null>;
+  findCartItem(cartId: string, productId: string): Promise<CartItem | null>;
 }
