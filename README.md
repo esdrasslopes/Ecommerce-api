@@ -24,13 +24,13 @@
 - [x] Apenas o usuário administrador deve validar a situação de um produto.
 - [x] Apenas produtos disponíveis em estoque devem estar disponíveis.
 - [] Um pedido só pode ser cancelado pelo usuário enquanto estiver no status "pendente".
-- [] Não é permitido finalizar uma compra com produtos cuja quantidade no carrinho ultrapasse o estoque disponível.
+- [x] Não é permitido finalizar uma compra com produtos cuja quantidade no carrinho ultrapasse o estoque disponível.
 - [] Ao finalizar uma compra, a quantidade do produto deve ser reduzida automaticamente.
 
 ## RNF
 
 - [x] O banco de dados utilizado deve ser Postgresql
-- [] As requisições de um usuário devem ser feitas a partir de um token JWT
+- [x] As requisições de um usuário devem ser feitas a partir de um token JWT
 - [x] O backend deve ser desenvolvido com Node.js, Fastify e TypeScript.
 - [x] O sistema deve estar containerizado com Docker para facilitar desenvolvimento e implantação.
 
