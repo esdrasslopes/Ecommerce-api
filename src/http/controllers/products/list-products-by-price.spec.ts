@@ -6,7 +6,7 @@ import request from "supertest";
 
 import { createCategoryAndProducts } from "@/utils/test-e2e/create-category-and-product";
 
-describe("List All Products Availables controler (e2e)", () => {
+describe("List Products By Price controler (e2e)", () => {
   beforeAll(async () => {
     await app.ready();
   });
@@ -15,18 +15,19 @@ describe("List All Products Availables controler (e2e)", () => {
     await app.close();
   });
 
-  it("should be able to list all products availables", async () => {
+  it("should be able to list products by price", async () => {
     const { token } = await createCategoryAndProducts(app);
 
     const response = await request(app.server)
-      .get(`/products`)
+      .get(`/products/price`)
       .query({
         page: "1",
+        query: 49.99,
       })
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toEqual(200);
 
-    expect(response.body.products).toHaveLength(1);
+    expect(response.body.productsByPrice).toHaveLength(1);
   });
 });

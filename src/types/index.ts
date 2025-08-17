@@ -77,3 +77,18 @@ export const updateProductBodySchema = z.object({
 export const productsAvailablesBodySchema = z.object({
   page: z.coerce.number(),
 });
+
+export const productsByCategoryBodySchema = z.object({
+  query: z.enum(Object.values(CategoryName)),
+  page: z.coerce.number(),
+});
+
+export const productsByNameBodySchema = z.object({
+  query: z.string(),
+  page: z.coerce.number(),
+});
+
+export const productsByPriceBodySchema = z.object({
+  query: z.coerce.number(),
+  page: z.coerce.number(),
+});

@@ -18,6 +18,12 @@ import { updateProduct } from "./update-product";
 
 import { listAllProductsAvailables } from "./list-all-products-availables";
 
+import { listProductsByCategory } from "./list-products-by-category";
+
+import { listProductsByName } from "./list-products-by-name";
+
+import { listProductsByPrice } from "./list-products-by-price";
+
 export const productsRoutes = async (app: FastifyInstance) => {
   app.addHook("onRequest", verifyJwt);
 
@@ -42,4 +48,10 @@ export const productsRoutes = async (app: FastifyInstance) => {
   app.patch("/:id", { onRequest: [verifyUserRole("ADMIN")] }, updateProduct);
 
   app.get("/", listAllProductsAvailables);
+
+  app.get("/category", listProductsByCategory);
+
+  app.get("/name", listProductsByName);
+
+  app.get("/price", listProductsByPrice);
 };
