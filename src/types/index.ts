@@ -59,6 +59,17 @@ export const createProductBodySchema = z.object({
   image_url: z.string().nullable(),
 });
 
-export const deleteProductBodySchema = z.object({
+export const deleteOrGetOrUpdateProductBodySchema = z.object({
   id: z.string().uuid(),
+});
+
+export const updateProductBodySchema = z.object({
+  name: z.string().optional(),
+  description: z.string().optional(),
+  price: z.coerce.number().optional(),
+  stock: z.coerce.number().optional(),
+  author: z.string().optional(),
+  publisher: z.string().optional(),
+  categoryName: z.enum(Object.values(CategoryName)).optional(),
+  image_url: z.string().optional(),
 });

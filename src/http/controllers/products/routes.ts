@@ -12,6 +12,10 @@ import { upload } from "./upload-image";
 
 import { deleteProduct } from "./delete-product";
 
+import { getDetailsOfASpecificProduct } from "./get-details-of-a-specific-product";
+
+import { updateProduct } from "./update-product";
+
 export const productsRoutes = async (app: FastifyInstance) => {
   app.addHook("onRequest", verifyJwt);
 
@@ -30,4 +34,8 @@ export const productsRoutes = async (app: FastifyInstance) => {
     { onRequest: [verifyUserRole("ADMIN")] },
     deleteProduct
   );
+
+  app.get("/:id", getDetailsOfASpecificProduct);
+
+  app.patch("/:id", { onRequest: [verifyUserRole("ADMIN")] }, updateProduct);
 };

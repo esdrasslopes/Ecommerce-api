@@ -20,12 +20,12 @@
 
 ## RN
 
-- [] Apenas administradores podem adicionar produtos.
+- [x] Apenas administradores podem adicionar produtos.
 - [x] Apenas o usuário administrador deve validar a situação de um produto.
 - [x] Apenas produtos disponíveis em estoque devem estar disponíveis.
-- [] Um pedido só pode ser cancelado pelo usuário enquanto estiver no status "pendente".
+- [x] Um pedido só pode ser cancelado pelo usuário enquanto estiver no status "pendente".
 - [x] Não é permitido finalizar uma compra com produtos cuja quantidade no carrinho ultrapasse o estoque disponível.
-- [] Ao finalizar uma compra, a quantidade do produto deve ser reduzida automaticamente.
+- [x] Ao finalizar uma compra, a quantidade do produto deve ser reduzida automaticamente.
 
 ## RNF
 

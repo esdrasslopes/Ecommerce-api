@@ -6,7 +6,7 @@ import request from "supertest";
 
 import { createCategoryAndProducts } from "@/utils/test-e2e/create-category-and-product";
 
-describe("Delete Product controler (e2e)", () => {
+describe("Update Product controler (e2e)", () => {
   beforeAll(async () => {
     await app.ready();
   });
@@ -15,12 +15,15 @@ describe("Delete Product controler (e2e)", () => {
     await app.close();
   });
 
-  it("should be able to delete product", async () => {
+  it("should be able to update product", async () => {
     const { productId, token } = await createCategoryAndProducts(app);
 
     const response = await request(app.server)
-      .delete(`/products/delete/${productId}`)
-      .set("Authorization", `Bearer ${token}`);
+      .patch(`/products/${productId}`)
+      .set("Authorization", `Bearer ${token}`)
+      .send({
+        stock: 11,
+      });
 
     expect(response.statusCode).toEqual(200);
   });

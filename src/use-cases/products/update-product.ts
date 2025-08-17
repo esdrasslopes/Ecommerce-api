@@ -6,6 +6,8 @@ import { ProductDoesNotExistError } from "../errors/product-does-not-exist-error
 
 import { CategoryDoesNotExistError } from "../errors/category-does-not-exist";
 
+import { deleteImage } from "@/utils/files/delete-image";
+
 interface UpdateProductUseCaseRequest {
   name: string;
   description?: string;
@@ -43,6 +45,14 @@ export class UpdateProductUseCase {
 
     if (!productToUpdate) {
       throw new ProductDoesNotExistError();
+    }
+
+    if (
+      image_url !== undefined &&
+      image_url !== productToUpdate.image_url &&
+      productToUpdate.image_url !== null
+    ) {
+      await deleteImage(productToUpdate.image_url);
     }
 
     let categoryId: string | null = null;
