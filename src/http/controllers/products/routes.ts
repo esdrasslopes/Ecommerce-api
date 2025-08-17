@@ -6,6 +6,12 @@ import { createCategory } from "./create-category";
 
 import { verifyUserRole } from "@/http/middlewares/verify-user-role";
 
+import { createProduct } from "./create-product";
+
+import { upload } from "./upload-image";
+
+import { deleteProduct } from "./delete-product";
+
 export const productsRoutes = async (app: FastifyInstance) => {
   app.addHook("onRequest", verifyJwt);
 
@@ -13,5 +19,15 @@ export const productsRoutes = async (app: FastifyInstance) => {
     "/create/category",
     { onRequest: [verifyUserRole("ADMIN")] },
     createCategory
+  );
+
+  app.post("/create", { onRequest: [verifyUserRole("ADMIN")] }, createProduct);
+
+  app.post("/upload", { onRequest: [verifyUserRole("ADMIN")] }, upload);
+
+  app.delete(
+    "/delete/:id",
+    { onRequest: [verifyUserRole("ADMIN")] },
+    deleteProduct
   );
 };

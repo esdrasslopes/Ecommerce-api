@@ -21,11 +21,15 @@ import { productsRoutes } from "./http/controllers/products/routes";
 export const app = fastify();
 
 app.register(fastifyStatic, {
-  root: path.resolve("public"),
+  root: path.resolve(process.cwd(), "public"),
   prefix: "/public/",
 });
 
-app.register(multipart);
+app.register(multipart, {
+  limits: {
+    fileSize: 10 * 1024 * 1024,
+  },
+});
 
 app.register(cookies);
 

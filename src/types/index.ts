@@ -47,3 +47,18 @@ export const profileBodySchema = z.object({
 export const categoryBodySchema = z.object({
   name: z.enum(Object.values(CategoryName)),
 });
+
+export const createProductBodySchema = z.object({
+  name: z.string(),
+  description: z.string().nullable(),
+  price: z.coerce.number(),
+  stock: z.coerce.number(),
+  author: z.string(),
+  publisher: z.string(),
+  categoryName: z.enum(Object.values(CategoryName)),
+  image_url: z.string().nullable(),
+});
+
+export const deleteProductBodySchema = z.object({
+  id: z.string().uuid(),
+});
