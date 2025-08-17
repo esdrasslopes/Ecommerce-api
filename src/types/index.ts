@@ -73,3 +73,7 @@ export const updateProductBodySchema = z.object({
   categoryName: z.enum(Object.values(CategoryName)).optional(),
   image_url: z.string().optional(),
 });
+
+export const productsAvailablesBodySchema = z.object({
+  page: z.coerce.number(),
+});

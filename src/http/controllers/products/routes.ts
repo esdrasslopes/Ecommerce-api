@@ -16,6 +16,8 @@ import { getDetailsOfASpecificProduct } from "./get-details-of-a-specific-produc
 
 import { updateProduct } from "./update-product";
 
+import { listAllProductsAvailables } from "./list-all-products-availables";
+
 export const productsRoutes = async (app: FastifyInstance) => {
   app.addHook("onRequest", verifyJwt);
 
@@ -38,4 +40,6 @@ export const productsRoutes = async (app: FastifyInstance) => {
   app.get("/:id", getDetailsOfASpecificProduct);
 
   app.patch("/:id", { onRequest: [verifyUserRole("ADMIN")] }, updateProduct);
+
+  app.get("/", listAllProductsAvailables);
 };
