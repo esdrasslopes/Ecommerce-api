@@ -14,10 +14,6 @@
 </div>
 
 <p align="center">
-  <img alt="Status" src="https://img.shields.io/badge/status-em--desenvolvimento-green">
-</p>
-
-<p align="center">
  <a href="#-sobre-o-projeto">Sobre</a> •
  <a href="#-funcionalidades">Funcionalidades</a> •
  <a href="#-tecnologias-utilizadas">Tecnologias</a> •
