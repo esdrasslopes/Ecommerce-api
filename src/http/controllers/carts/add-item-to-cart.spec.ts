@@ -4,9 +4,9 @@ import { app } from "@/app";
 
 import request from "supertest";
 
-import { createCategoryAndProducts } from "@/utils/test-e2e/create-category-and-product";
+import { createCartAndCartItem } from "@/utils/test-e2e/create-cart-and-cart-items";
 
-describe("Add Item To Cart  controler (e2e)", () => {
+describe("Add Item To Cart controler (e2e)", () => {
   beforeAll(async () => {
     await app.ready();
   });
@@ -15,14 +15,8 @@ describe("Add Item To Cart  controler (e2e)", () => {
     await app.close();
   });
 
-  it("should be able to add item to cart ", async () => {
-    const { productId, token, userId } = await createCategoryAndProducts(app);
-
-    const cart = await request(app.server)
-      .post(`/carts/create/${userId}`)
-      .set("Authorization", `Bearer ${token}`);
-
-    const cartId = cart.body.cart.id;
+  it("should be able to add item to cart", async () => {
+    const { productId, token, cartId } = await createCartAndCartItem(app);
 
     const response = await request(app.server)
       .post(`/carts/create/cartItem/${cartId}`)

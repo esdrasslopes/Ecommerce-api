@@ -67,7 +67,7 @@ export const getProductBodySchema = z.object({
   id: z.string().uuid(),
 });
 
-export const updateProductBodySchemaParams = z.object({
+export const updateProductParamsSchema = z.object({
   id: z.string().uuid(),
 });
 
@@ -105,11 +105,16 @@ export const createCartBodySchema = z.object({
   userId: z.string(),
 });
 
-export const addItemToCartBodySchemaParams = z.object({
+export const addItemToCartParamsSchema = z.object({
   cartId: z.string(),
 });
 
 export const addItemToCartBodySchema = z.object({
   productId: z.string(),
   quantity: z.coerce.number(),
+});
+
+export const deleteCartItemParamsSchema = z.object({
+  cartId: z.string(),
+  cartItemId: z.string(),
 });

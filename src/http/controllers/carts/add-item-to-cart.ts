@@ -1,9 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 
-import {
-  addItemToCartBodySchemaParams,
-  addItemToCartBodySchema,
-} from "@/types";
+import { addItemToCartParamsSchema, addItemToCartBodySchema } from "@/types";
 
 import { makeAddItemToCartUseCase } from "@/use-cases/factories/make-add-item-to-cart-use-case";
 
@@ -15,7 +12,7 @@ export const addItemToCart = async (
   request: FastifyRequest,
   reply: FastifyReply
 ) => {
-  const { cartId } = addItemToCartBodySchemaParams.parse(request.params);
+  const { cartId } = addItemToCartParamsSchema.parse(request.params);
 
   const { productId, quantity } = addItemToCartBodySchema.parse(request.body);
 

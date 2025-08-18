@@ -1,7 +1,4 @@
-import {
-  updateProductBodySchemaParams,
-  updateProductBodySchema,
-} from "@/types";
+import { updateProductParamsSchema, updateProductBodySchema } from "@/types";
 
 import { FastifyReply, FastifyRequest } from "fastify";
 
@@ -11,7 +8,7 @@ export const updateProduct = async (
   request: FastifyRequest,
   reply: FastifyReply
 ) => {
-  const { id } = updateProductBodySchemaParams.parse(request.params);
+  const { id } = updateProductParamsSchema.parse(request.params);
 
   try {
     const data = updateProductBodySchema.parse(request.body);
