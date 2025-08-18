@@ -1,35 +1,121 @@
-# Requisitos e regras de negócio
+# 🛍️ E-commerce API
 
-## RF
+<div align="center">
 
-- [x] O usuário deve conseguir se cadastrar.
-- [x] O usuário deve conseguir se autenticar.
-- [x] O usuário deve conseguir acessar os dados do seu perfil.
-- [x] O usuário deve conseguir comprar um produto.
-- [x] O usuário deve conseguir adicionar um produto ao carrinho.
-- [x] O usuário deve conseguir ver o seu historico de compras.
-- [x] O usuário deve conseguir ver o seu carrinho.
-- [x] O usuário deve conseguir filtrar produtos a partir de sua categoria, preço ou nome.
-- [x] O usuário deve conseguir ver detalhes sobre um produto em específico.
-- [x] O usuário deve conseguir ver detalhes do pedido (Ex: pago, entregue).
-- [x] O usuário administrador deve conseguir adicionar itens ao sistema.
-- [x] O usuário administrador deve conseguir adicionar categorias ao sistema.
-- [x] O usuário administrador deve conseguir vizualizar o histórico de pedidos.
-- [x] O usuário administrador deve conseguir validar a situação de um produto.
-- [x] O usuário deve conseguir cancelar um pedido.
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Fastify](https://img.shields.io/badge/Fastify-000000?style=for-the-badge&logo=fastify&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
+![Zod](https://img.shields.io/badge/Zod-3E67B1?style=for-the-badge&logo=zod&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-6E941C?style=for-the-badge&logo=vitest&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-## RN
+</div>
 
-- [x] Apenas administradores podem adicionar produtos.
-- [x] Apenas o usuário administrador deve validar a situação de um produto.
-- [x] Apenas produtos disponíveis em estoque devem estar disponíveis.
-- [x] Um pedido só pode ser cancelado pelo usuário enquanto estiver no status "pendente".
-- [x] Não é permitido finalizar uma compra com produtos cuja quantidade no carrinho ultrapasse o estoque disponível.
-- [x] Ao finalizar uma compra, a quantidade do produto deve ser reduzida automaticamente.
+<p align="center">
+ <a href="#-sobre-o-projeto">Sobre</a> •
+ <a href="#-tecnologias-utilizadas">Tecnologias</a> •
+ <a href="#-começando">Começando</a> •
+ <a href="#-executando-os-testes">Testes</a> •
+ <a href="#-variáveis-de-ambiente">Variáveis de Ambiente</a> •
+ <a href="#-licença">Licença</a>
+</p>
 
-## RNF
+---
 
-- [x] O banco de dados utilizado deve ser Postgresql
-- [x] As requisições de um usuário devem ser feitas a partir de um token JWT
-- [x] O backend deve ser desenvolvido com Node.js, Fastify e TypeScript.
-- [x] O sistema deve estar containerizado com Docker para facilitar desenvolvimento e implantação.
+## 📖 Sobre o Projeto
+
+Esta é uma API RESTful robusta para um sistema de e-commerce, construída com foco em performance e escalabilidade. Ela utiliza um stack moderno com Fastify para o servidor web, Prisma como ORM para uma comunicação eficiente com o banco de dados PostgreSQL, e Zod para validação de esquemas, garantindo a integridade dos dados.
+
+---
+
+## ✨ Tecnologias Utilizadas
+
+Este projeto foi construído utilizando as seguintes tecnologias:
+
+- **[Node.js](https://nodejs.org/en/)**: Ambiente de execução JavaScript.
+- **[TypeScript](https://www.typescriptlang.org/)**: Superset do JavaScript que adiciona tipagem estática.
+- **[Fastify](https://www.fastify.io/)**: Framework web focado em alta performance.
+- **[Prisma](https://www.prisma.io/)**: ORM de próxima geração para Node.js e TypeScript.
+- **[PostgreSQL](https://www.postgresql.org/)**: Sistema de gerenciamento de banco de dados relacional.
+- **[Zod](https://zod.dev/)**: Biblioteca de validação de esquemas com inferência de tipos.
+- **[Vitest](https://vitest.dev/)**: Framework de testes unitários e de integração.
+- **[Docker](https://www.docker.com/)**: Plataforma para desenvolvimento, envio e execução de aplicações em contêineres.
+- **[TSX](https://github.com/esbuild-kit/tsx)**: Executor de TypeScript para Node.js com base no esbuild.
+
+---
+
+## 🚀 Começando
+
+Para executar este projeto localmente, siga os passos abaixo.
+
+### Pré-requisitos
+
+Você vai precisar ter as seguintes ferramentas instaladas na sua máquina:
+
+- [Node.js](https://nodejs.org/en/) (v18 ou superior)
+- [NPM](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
+- [Docker](https://www.docker.com/products/docker-desktop/) e [Docker Compose](https://docs.docker.com/compose/install/)
+
+### Instalação
+
+1.  **Clone o repositório:**
+
+    ```bash
+    git clone https://github.com/esdrasslopes/Ecommerce-api.git
+
+    ```
+
+2.  **Instale as dependências:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Inicie o banco de dados com Docker:**
+    O banco de dados PostgreSQL será executado em um contêiner Docker.
+
+    ```bash
+    docker-compose up -d
+    ```
+
+    Isso iniciará o banco na porta `5433` da sua máquina local.
+
+4.  **Configure as variáveis de ambiente:**
+    Copie o arquivo de exemplo `.env.example` e renomeie para `.env`.
+
+    ```bash
+    cp .env.example .env
+    ```
+
+    _As variáveis padrão já estão configuradas para se conectar ao banco de dados Docker._
+
+5.  **Execute as migrações do Prisma:**
+    Este comando irá criar as tabelas no seu banco de dados com base no schema do Prisma.
+    ```bash
+    npx prisma migrate dev
+    ```
+
+### Executando a Aplicação
+
+Para iniciar o servidor em modo de desenvolvimento com hot-reload:
+
+```bash
+npm run start:dev
+```
+
+### 🧪 Executando os Testes
+
+O projeto possui dois conjuntos de testes: testes de unidade/casos de uso e testes end-to-end (E2E).
+
+1.  **Testes de Unidade/Casos de Uso:**
+
+    ```bash
+    npm test
+    ```
+
+2.  **Testes End-to-End (Controllers):**
+    ```bash
+    npm run test:e2e
+    ```
