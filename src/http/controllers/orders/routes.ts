@@ -14,6 +14,8 @@ import { verifyUserRole } from "@/http/middlewares/verify-user-role";
 
 import { validateOrder } from "./validate-order";
 
+import { ListOrdersToValidate } from "./list-orders-to-validate";
+
 export const ordersRoutes = async (app: FastifyInstance) => {
   app.addHook("onRequest", verifyJwt);
 
@@ -29,5 +31,11 @@ export const ordersRoutes = async (app: FastifyInstance) => {
     "/validate/:orderId",
     { onRequest: [verifyUserRole("ADMIN")] },
     validateOrder
+  );
+
+  app.get(
+    "/to-validate",
+    { onRequest: [verifyUserRole("ADMIN")] },
+    ListOrdersToValidate
   );
 };

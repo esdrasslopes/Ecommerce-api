@@ -123,6 +123,7 @@ export class PrismaOrdersRepository implements IOrdersRepository {
       return {
         ...order,
         items: order.OrderItem ?? [],
+        OrderItem: undefined,
       };
     });
 
