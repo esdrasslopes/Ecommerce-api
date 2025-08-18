@@ -6,7 +6,7 @@ import request from "supertest";
 
 import { createCategoryAndProducts } from "@/utils/test-e2e/create-category-and-product";
 
-describe("Create Cart Item controler (e2e)", () => {
+describe("Add Item To Cart  controler (e2e)", () => {
   beforeAll(async () => {
     await app.ready();
   });
@@ -15,7 +15,7 @@ describe("Create Cart Item controler (e2e)", () => {
     await app.close();
   });
 
-  it("should be able to create cart item", async () => {
+  it("should be able to add item to cart ", async () => {
     const { productId, token, userId } = await createCategoryAndProducts(app);
 
     const cart = await request(app.server)
