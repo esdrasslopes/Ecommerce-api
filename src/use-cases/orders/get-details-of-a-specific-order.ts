@@ -4,11 +4,11 @@ import { OrderItem, OrderStatus } from "@prisma/client";
 
 import { OrderDoesNotExistError } from "../errors/order-does-not-exist-error";
 
-interface GetDetailsOfASpecificOrderRequest {
+interface GetDetailsOfASpecificOrderUseCaseRequest {
   orderId: string;
 }
 
-interface GetDetailsOfASpecificOrderResponse {
+interface GetDetailsOfASpecificOrderUseCaseResponse {
   order: {
     status: OrderStatus;
     total_price: number;
@@ -16,7 +16,7 @@ interface GetDetailsOfASpecificOrderResponse {
   };
 }
 
-export class GetDetailsOfASpecificOrder {
+export class GetDetailsOfASpecificOrderUseCase {
   private ordersRepository: IOrdersRepository;
 
   constructor(ordersRepository: IOrdersRepository) {
@@ -25,7 +25,7 @@ export class GetDetailsOfASpecificOrder {
 
   async execute({
     orderId,
-  }: GetDetailsOfASpecificOrderRequest): Promise<GetDetailsOfASpecificOrderResponse> {
+  }: GetDetailsOfASpecificOrderUseCaseRequest): Promise<GetDetailsOfASpecificOrderUseCaseResponse> {
     const order = await this.ordersRepository.getDetailsOfASpecificOrder(
       orderId
     );

@@ -26,7 +26,7 @@ export const getDetailsOfASpecificProduct = async (
     });
   } catch (error) {
     if (error instanceof ProductDoesNotExistError) {
-      return reply.status(200).send({
+      return reply.status(400).send({
         message: error.message,
       });
     }

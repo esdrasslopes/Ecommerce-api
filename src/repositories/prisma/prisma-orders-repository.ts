@@ -90,11 +90,21 @@ export class PrismaOrdersRepository implements IOrdersRepository {
 
   async getDetailsOfASpecificOrder(orderId: string) {
     const order = await prisma.order.findUnique({
-      where: {
-        id: orderId,
-      },
+      where: { id: orderId },
+      include: { OrderItem: true },
     });
 
-    return order;
+    if (!order) {
+      return null;
+    }
+
+    return {
+      id: order?.id,
+      status: order?.status,
+      created_at: order?.created_at,
+      total_price: order?.total_price,
+      user_id: order?.user_id,
+      items: order?.OrderItem ?? [],
+    };
   }
 }

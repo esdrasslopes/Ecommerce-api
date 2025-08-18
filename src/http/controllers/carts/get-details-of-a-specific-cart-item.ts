@@ -15,9 +15,10 @@ export const getDetailsOfASpecificCartItem = async (
   );
 
   try {
-    const addItemToCartUseCase = makeGetDetailsOfASpecifCartItemUseCase();
+    const getDetailsOfASpecificCartItemUseCase =
+      makeGetDetailsOfASpecifCartItemUseCase();
 
-    const { cartItem } = await addItemToCartUseCase.execute({
+    const { cartItem } = await getDetailsOfASpecificCartItemUseCase.execute({
       id: cartItemId,
     });
 
@@ -27,7 +28,7 @@ export const getDetailsOfASpecificCartItem = async (
     });
   } catch (error) {
     if (error instanceof CartItemDoesNotExistError) {
-      return reply.status(201).send({
+      return reply.status(400).send({
         message: error.message,
       });
     }

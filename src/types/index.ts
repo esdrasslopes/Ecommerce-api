@@ -157,3 +157,15 @@ export const createOrderBodySchema = z.object({
 export const cancelOrderParamsSchema = z.object({
   orderId: z.string(),
 });
+
+export const getDetailsOfASpecificOrderParamsSchema = z.object({
+  orderId: z.string(),
+});
+
+export const getOrderHistoryParamsSchema = z.object({
+  userId: z.string(),
+});
+
+export const getOrderHistoryQuerySchema = z.object({
+  page: z.coerce.number(),
+});

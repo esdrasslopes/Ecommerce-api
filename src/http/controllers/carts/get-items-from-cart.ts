@@ -15,9 +15,9 @@ export const getItemsFromCart = async (
 
   const { page } = getItemsFromCartQuerySchema.parse(request.query);
 
-  const addItemToCartUseCase = makeGetItemsFromCartUseCase();
+  const getItemsFromCartUseCase = makeGetItemsFromCartUseCase();
 
-  const { cartItems } = await addItemToCartUseCase.execute({
+  const { cartItems } = await getItemsFromCartUseCase.execute({
     cartId,
     page,
   });
