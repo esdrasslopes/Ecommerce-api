@@ -1,5 +1,5 @@
 import {
-  deleteOrGetOrUpdateProductBodySchema,
+  updateProductBodySchemaParams,
   updateProductBodySchema,
 } from "@/types";
 
@@ -11,7 +11,7 @@ export const updateProduct = async (
   request: FastifyRequest,
   reply: FastifyReply
 ) => {
-  const { id } = deleteOrGetOrUpdateProductBodySchema.parse(request.params);
+  const { id } = updateProductBodySchemaParams.parse(request.params);
 
   try {
     const data = updateProductBodySchema.parse(request.body);

@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 
 import { makeGetDetailsOfASpecificProductsUseCase } from "@/use-cases/factories/make-get-details-a-specific-product-use-case";
 
-import { deleteOrGetOrUpdateProductBodySchema } from "@/types";
+import { getProductBodySchema } from "@/types";
 
 import { ProductDoesNotExistError } from "@/use-cases/errors/product-does-not-exist-error";
 
@@ -11,7 +11,7 @@ export const getDetailsOfASpecificProduct = async (
   reply: FastifyReply
 ) => {
   try {
-    const { id } = deleteOrGetOrUpdateProductBodySchema.parse(request.params);
+    const { id } = getProductBodySchema.parse(request.params);
 
     const getDetailsOfASpecificProduct =
       makeGetDetailsOfASpecificProductsUseCase();

@@ -10,7 +10,7 @@ export const createAndAuthenticateUser = async (
   app: FastifyInstance,
   isAdmin: boolean = false
 ) => {
-  await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
       name: "John Doe",
       email: "johndoe@gmail.com",
@@ -26,5 +26,5 @@ export const createAndAuthenticateUser = async (
 
   const { token } = authResponse.body;
 
-  return { token };
+  return { token, userId: user.id };
 };

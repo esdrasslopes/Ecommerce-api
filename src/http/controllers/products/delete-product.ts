@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 
-import { deleteOrGetOrUpdateProductBodySchema } from "@/types";
+import { deleteProductBodySchema } from "@/types";
 
 import { makeDeleteProductUseCase } from "@/use-cases/factories/make-delete-product.-use-case";
 
@@ -12,7 +12,7 @@ export const deleteProduct = async (
   reply: FastifyReply
 ) => {
   try {
-    const { id } = deleteOrGetOrUpdateProductBodySchema.parse(request.params);
+    const { id } = deleteProductBodySchema.parse(request.params);
 
     const deleteProductUseCase = makeDeleteProductUseCase();
 

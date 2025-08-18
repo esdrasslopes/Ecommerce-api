@@ -17,6 +17,7 @@ import { env } from "./env";
 import { usersRoutes } from "./http/controllers/users/routes";
 
 import { productsRoutes } from "./http/controllers/products/routes";
+import { cartsRoutes } from "./http/controllers/carts/routes";
 
 export const app = fastify();
 
@@ -48,6 +49,10 @@ app.register(usersRoutes);
 
 app.register(productsRoutes, {
   prefix: "/products",
+});
+
+app.register(cartsRoutes, {
+  prefix: "/carts",
 });
 
 app.setErrorHandler((error, _, reply) => {

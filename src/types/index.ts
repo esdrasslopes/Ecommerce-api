@@ -59,7 +59,15 @@ export const createProductBodySchema = z.object({
   image_url: z.string().nullable(),
 });
 
-export const deleteOrGetOrUpdateProductBodySchema = z.object({
+export const deleteProductBodySchema = z.object({
+  id: z.string().uuid(),
+});
+
+export const getProductBodySchema = z.object({
+  id: z.string().uuid(),
+});
+
+export const updateProductBodySchemaParams = z.object({
   id: z.string().uuid(),
 });
 
@@ -91,4 +99,8 @@ export const productsByNameBodySchema = z.object({
 export const productsByPriceBodySchema = z.object({
   query: z.coerce.number(),
   page: z.coerce.number(),
+});
+
+export const createCartBodySchema = z.object({
+  userId: z.string(),
 });
