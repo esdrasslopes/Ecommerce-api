@@ -32,5 +32,7 @@ export const deleteCartItem = async (
         message: error.message,
       });
     }
+
+    throw error;
   }
 };

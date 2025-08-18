@@ -12,6 +12,8 @@ import { updateCartItemQuantity } from "./update-cart-item-quantity";
 
 import { getItemsFromCart } from "./get-items-from-cart";
 
+import { getDetailsOfASpecificCartItem } from "./get-details-of-a-specific-cart-item";
+
 export const cartsRoutes = async (app: FastifyInstance) => {
   app.addHook("onRequest", verifyJwt);
 
@@ -24,4 +26,6 @@ export const cartsRoutes = async (app: FastifyInstance) => {
   app.patch("/:cartItemId", updateCartItemQuantity);
 
   app.get("/:cartId", getItemsFromCart);
+
+  app.get("/cartItem/:cartItemId", getDetailsOfASpecificCartItem);
 };

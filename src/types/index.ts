@@ -134,3 +134,7 @@ export const getItemsFromCartQuerySchema = z.object({
 export const getItemsFromCartParamsSchema = z.object({
   cartId: z.string(),
 });
+
+export const getDetailsOfASpecificCartItemParamsSchema = z.object({
+  cartItemId: z.string(),
+});

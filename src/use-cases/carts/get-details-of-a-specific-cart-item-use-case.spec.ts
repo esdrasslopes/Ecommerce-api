@@ -4,7 +4,7 @@ import { InMemoryCartsRepository } from "@/repositories/in-memory/in-memory-cart
 
 import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-products-repository";
 
-import { GetDetailsOfASpecifCartItemUseCase } from "./get-details-of-a-specific-cart-item";
+import { GetDetailsOfASpecifCartItemUseCase } from "./get-details-of-a-specific-cart-item-use-case";
 
 import { createUser } from "@/utils/test-in-memory/create-user";
 

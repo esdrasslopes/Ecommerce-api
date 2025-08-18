@@ -37,5 +37,7 @@ export const updateCartItemQuantity = async (
         message: error.message,
       });
     }
+
+    throw error;
   }
 };
