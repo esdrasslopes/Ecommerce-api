@@ -91,4 +91,10 @@ export class InMemoryOrdersRepository implements IOrdersRepository {
 
     return order;
   }
+
+  async getOrdersToValidate() {
+    const orders = this.orders.filter((order) => order.status === "PENDING");
+
+    return orders;
+  }
 }

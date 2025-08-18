@@ -169,3 +169,7 @@ export const getOrderHistoryParamsSchema = z.object({
 export const getOrderHistoryQuerySchema = z.object({
   page: z.coerce.number(),
 });
+
+export const validateOrderParamsSchema = z.object({
+  orderId: z.string(),
+});

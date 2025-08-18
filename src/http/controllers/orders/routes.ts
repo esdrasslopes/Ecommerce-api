@@ -10,6 +10,10 @@ import { getDetailsOfASpecificOrder } from "./get-details-of-a-specific-order";
 
 import { getOrdersHistory } from "./get-orders-history";
 
+import { verifyUserRole } from "@/http/middlewares/verify-user-role";
+
+import { validateOrder } from "./validate-order";
+
 export const ordersRoutes = async (app: FastifyInstance) => {
   app.addHook("onRequest", verifyJwt);
 
@@ -20,4 +24,10 @@ export const ordersRoutes = async (app: FastifyInstance) => {
   app.get("/:orderId", getDetailsOfASpecificOrder);
 
   app.get("/history/:userId", getOrdersHistory);
+
+  app.patch(
+    "/validate/:orderId",
+    { onRequest: [verifyUserRole("ADMIN")] },
+    validateOrder
+  );
 };

@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 import { IOrdersRepository } from "../repositories-types/orders-repository";
 
 import { prisma } from "@/lib/prisma";
+import { OrderWithItems } from "@/types";
 
 export class PrismaOrdersRepository implements IOrdersRepository {
   async createOrder(data: Prisma.OrderUncheckedCreateInput) {
@@ -106,5 +107,25 @@ export class PrismaOrdersRepository implements IOrdersRepository {
       user_id: order?.user_id,
       items: order?.OrderItem ?? [],
     };
+  }
+
+  async getOrdersToValidate() {
+    const orders = await prisma.order.findMany({
+      where: {
+        status: "PENDING",
+      },
+      include: {
+        OrderItem: true,
+      },
+    });
+
+    const ordersToValidate = orders.map((order) => {
+      return {
+        ...order,
+        items: order.OrderItem ?? [],
+      };
+    });
+
+    return ordersToValidate;
   }
 }
