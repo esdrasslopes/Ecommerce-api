@@ -16,7 +16,7 @@ export const createCart = async (
     userId,
   });
 
-  return reply.status(200).send({
+  return reply.status(201).send({
     message: "Cart successfully created",
     cart,
   });

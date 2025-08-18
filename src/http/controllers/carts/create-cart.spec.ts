@@ -22,6 +22,6 @@ describe("Create Cart controler (e2e)", () => {
       .post(`/carts/create/${userId}`)
       .set("Authorization", `Bearer ${token}`);
 
-    expect(response.statusCode).toEqual(200);
+    expect(response.statusCode).toEqual(201);
   });
 });

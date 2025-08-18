@@ -4,10 +4,8 @@ import request from "supertest";
 
 import { createAndAuthenticateUser } from "./create-and-authenticate-user";
 
-import { prisma } from "@/lib/prisma";
-
 export const createCategoryAndProducts = async (app: FastifyInstance) => {
-  const { token } = await createAndAuthenticateUser(app, true);
+  const { token, userId } = await createAndAuthenticateUser(app, true);
 
   await request(app.server)
     .post("/products/create/category")
@@ -34,5 +32,6 @@ export const createCategoryAndProducts = async (app: FastifyInstance) => {
   return {
     productId: product.body.product.id,
     token,
+    userId,
   };
 };
