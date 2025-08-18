@@ -16,10 +16,10 @@ describe("Delete Item From Cart controler (e2e)", () => {
   });
 
   it("should be able to delete item from cart", async () => {
-    const { token, cartId, cartItemId } = await createCartAndCartItem(app);
+    const { token, cartId, cartItem } = await createCartAndCartItem(app);
 
     const response = await request(app.server)
-      .delete(`/carts/${cartId}/${cartItemId}`)
+      .delete(`/carts/${cartId}/${cartItem.id}`)
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toEqual(200);

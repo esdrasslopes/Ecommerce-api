@@ -1,8 +1,8 @@
-import { CategoryName, Order, OrderItem } from "@prisma/client";
+import { CategoryName, Order, OrderItem, CartItem } from "@prisma/client";
 
 import { OrderStatus } from "@prisma/client";
 
-import { coerce, z } from "zod";
+import { z } from "zod";
 
 export const envSchema = z.object({
   NODE_ENV: z.enum(["dev", "test", "production"]).default("dev"),
@@ -101,7 +101,7 @@ export const productsByPriceQuerySchema = z.object({
   page: z.coerce.number(),
 });
 
-export const createCartBodySchema = z.object({
+export const createCartParamsSchema = z.object({
   userId: z.string(),
 });
 
@@ -137,4 +137,19 @@ export const getItemsFromCartParamsSchema = z.object({
 
 export const getDetailsOfASpecificCartItemParamsSchema = z.object({
   cartItemId: z.string(),
+});
+
+export const createOrderParamsSchema = z.object({
+  userId: z.string(),
+});
+
+const cartItemSchema = z.object({
+  id: z.string(),
+  cart_id: z.string(),
+  product_id: z.string(),
+  quantity: z.coerce.number(),
+});
+
+export const createOrderBodySchema = z.object({
+  cartItems: z.array(cartItemSchema),
 });

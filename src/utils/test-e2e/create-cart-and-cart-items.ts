@@ -21,11 +21,13 @@ export const createCartAndCartItem = async (app: FastifyInstance) => {
       quantity: 1,
     });
 
+  const cartItem = response.body.cartItem;
+
   return {
     productId,
     token,
     userId,
     cartId,
-    cartItemId: response.body.cartItem.id,
+    cartItem,
   };
 };

@@ -26,7 +26,7 @@ export const createCategoryAndProducts = async (app: FastifyInstance) => {
       author: "Jane Austen",
       publisher: "T. Egerton, Whitehall",
       categoryName: "FICTION",
-      image_url: "/public/2b8dc5bf-7934-42e7-be54-4e587e414446.jpeg",
+      image_url: "",
     });
 
   return {

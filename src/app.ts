@@ -18,6 +18,7 @@ import { usersRoutes } from "./http/controllers/users/routes";
 
 import { productsRoutes } from "./http/controllers/products/routes";
 import { cartsRoutes } from "./http/controllers/carts/routes";
+import { ordersRoutes } from "./http/controllers/orders/routes";
 
 export const app = fastify();
 
@@ -53,6 +54,10 @@ app.register(productsRoutes, {
 
 app.register(cartsRoutes, {
   prefix: "/carts",
+});
+
+app.register(ordersRoutes, {
+  prefix: "/orders",
 });
 
 app.setErrorHandler((error, _, reply) => {

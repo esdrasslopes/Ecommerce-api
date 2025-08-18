@@ -16,10 +16,10 @@ describe("Get Details Of A Specific Cart Item controler (e2e)", () => {
   });
 
   it("should be able to get details of a specific cart item", async () => {
-    const { token, cartItemId } = await createCartAndCartItem(app);
+    const { token, cartItem } = await createCartAndCartItem(app);
 
     const response = await request(app.server)
-      .get(`/carts/cartItem/${cartItemId}`)
+      .get(`/carts/cartItem/${cartItem.id}`)
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toEqual(200);

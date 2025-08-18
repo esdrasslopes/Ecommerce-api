@@ -6,7 +6,7 @@ import request from "supertest";
 
 import { createCartAndCartItem } from "@/utils/test-e2e/create-cart-and-cart-items";
 
-describe("Update Cart Item Quantity controler (e2e)", () => {
+describe("Create Order controler (e2e)", () => {
   beforeAll(async () => {
     await app.ready();
   });
@@ -15,16 +15,16 @@ describe("Update Cart Item Quantity controler (e2e)", () => {
     await app.close();
   });
 
-  it("should be able to update cart item quantity", async () => {
-    const { token, cartItem } = await createCartAndCartItem(app);
+  it("should be able to create order", async () => {
+    const { token, userId, cartItem } = await createCartAndCartItem(app);
 
     const response = await request(app.server)
-      .patch(`/carts/${cartItem.id}`)
+      .post(`/orders/${userId}`)
       .set("Authorization", `Bearer ${token}`)
       .send({
-        newQuantity: 4,
+        cartItems: [cartItem],
       });
 
-    expect(response.statusCode).toEqual(200);
+    expect(response.statusCode).toEqual(201);
   });
 });
