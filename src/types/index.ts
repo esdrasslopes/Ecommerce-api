@@ -118,3 +118,11 @@ export const deleteCartItemParamsSchema = z.object({
   cartId: z.string(),
   cartItemId: z.string(),
 });
+
+export const updateCartItemQuantityParamsSchema = z.object({
+  cartItemId: z.string(),
+});
+
+export const updateCartItemQuantityBodySchema = z.object({
+  newQuantity: z.coerce.number(),
+});

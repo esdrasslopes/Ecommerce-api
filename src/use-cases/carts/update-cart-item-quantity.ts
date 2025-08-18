@@ -4,6 +4,8 @@ import { IProductsRepository } from "@/repositories/repositories-types/products-
 
 import { CartItem } from "@prisma/client";
 
+import { CartItemDoesNotExistError } from "../errors/cart-item-does-not-exist-error";
+
 interface UpdateCartItemQuantityUseCaseRequest {
   cartItemId: string;
   newQuantity: number;
@@ -33,6 +35,10 @@ export class UpdateCartItemQuantityUseCase {
     const cartItem = await this.cartItemsRepository.findCartItemById(
       cartItemId
     );
+
+    if (!cartItem) {
+      throw new CartItemDoesNotExistError();
+    }
 
     const updatedCartItem =
       await this.cartItemsRepository.updateCartItemQuantity(
