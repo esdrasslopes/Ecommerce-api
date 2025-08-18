@@ -86,17 +86,17 @@ export const productsAvailablesBodySchema = z.object({
   page: z.coerce.number(),
 });
 
-export const productsByCategoryBodySchema = z.object({
+export const productsByCategoryQuerySchema = z.object({
   query: z.enum(Object.values(CategoryName)),
   page: z.coerce.number(),
 });
 
-export const productsByNameBodySchema = z.object({
+export const productsByNameQuerySchema = z.object({
   query: z.string(),
   page: z.coerce.number(),
 });
 
-export const productsByPriceBodySchema = z.object({
+export const productsByPriceQuerySchema = z.object({
   query: z.coerce.number(),
   page: z.coerce.number(),
 });
@@ -125,4 +125,12 @@ export const updateCartItemQuantityParamsSchema = z.object({
 
 export const updateCartItemQuantityBodySchema = z.object({
   newQuantity: z.coerce.number(),
+});
+
+export const getItemsFromCartQuerySchema = z.object({
+  page: z.coerce.number(),
+});
+
+export const getItemsFromCartParamsSchema = z.object({
+  cartId: z.string(),
 });

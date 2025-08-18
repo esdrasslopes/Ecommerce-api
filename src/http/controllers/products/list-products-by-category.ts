@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 
-import { productsByCategoryBodySchema } from "@/types";
+import { productsByCategoryQuerySchema } from "@/types";
 
 import { makeListProductsByCategoryUseCase } from "@/use-cases/factories/make-list-products-by-category-name";
 
@@ -8,7 +8,7 @@ export const listProductsByCategory = async (
   request: FastifyRequest,
   reply: FastifyReply
 ) => {
-  const { query, page } = productsByCategoryBodySchema.parse(request.query);
+  const { query, page } = productsByCategoryQuerySchema.parse(request.query);
 
   const listProductsByCategoryUseCase = makeListProductsByCategoryUseCase();
 

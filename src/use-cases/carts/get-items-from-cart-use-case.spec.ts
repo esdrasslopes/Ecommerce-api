@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach } from "vitest";
 
 import { InMemoryCartsRepository } from "@/repositories/in-memory/in-memory-carts-repository";
 
-import { GetItemsFromCartUseCase } from "./get-products-from-cart";
+import { GetItemsFromCartUseCase } from "./get-items-from-cart-use-case";
 
 import { createUser } from "@/utils/test-in-memory/create-user";
 

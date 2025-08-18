@@ -10,6 +10,8 @@ import { deleteCartItem } from "./delete-cart-item";
 
 import { updateCartItemQuantity } from "./update-cart-item-quantity";
 
+import { getItemsFromCart } from "./get-items-from-cart";
+
 export const cartsRoutes = async (app: FastifyInstance) => {
   app.addHook("onRequest", verifyJwt);
 
@@ -20,4 +22,6 @@ export const cartsRoutes = async (app: FastifyInstance) => {
   app.delete("/:cartId/:cartItemId", deleteCartItem);
 
   app.patch("/:cartItemId", updateCartItemQuantity);
+
+  app.get("/:cartId", getItemsFromCart);
 };
