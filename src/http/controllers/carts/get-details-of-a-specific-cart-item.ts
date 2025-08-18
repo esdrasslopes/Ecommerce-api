@@ -31,5 +31,7 @@ export const getDetailsOfASpecificCartItem = async (
         message: error.message,
       });
     }
+
+    throw error;
   }
 };

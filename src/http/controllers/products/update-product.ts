@@ -4,6 +4,8 @@ import { FastifyReply, FastifyRequest } from "fastify";
 
 import { makeUpdateProductUseCaseUseCase } from "@/use-cases/factories/make-update-product-use-case";
 
+import { ProductDoesNotExistError } from "@/use-cases/errors/product-does-not-exist-error";
+
 export const updateProduct = async (
   request: FastifyRequest,
   reply: FastifyReply
@@ -32,5 +34,11 @@ export const updateProduct = async (
       message: "Product updated successfully",
       updatedProduct,
     });
-  } catch (error) {}
+  } catch (error) {
+    if (error instanceof ProductDoesNotExistError) {
+      return reply.status(400).send({
+        message: error.message,
+      });
+    }
+  }
 };

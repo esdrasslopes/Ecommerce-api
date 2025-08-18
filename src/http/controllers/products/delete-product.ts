@@ -34,5 +34,7 @@ export const deleteProduct = async (
         message: error.message,
       });
     }
+
+    throw error;
   }
 };

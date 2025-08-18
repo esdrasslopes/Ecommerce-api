@@ -153,3 +153,7 @@ const cartItemSchema = z.object({
 export const createOrderBodySchema = z.object({
   cartItems: z.array(cartItemSchema),
 });
+
+export const cancelOrderParamsSchema = z.object({
+  orderId: z.string(),
+});
