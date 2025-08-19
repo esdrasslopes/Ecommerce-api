@@ -4,7 +4,7 @@ import { app } from "@/app";
 
 import request from "supertest";
 
-describe("Register controler (e2e)", () => {
+describe("Register controller (e2e)", () => {
   beforeAll(async () => {
     await app.ready();
   });

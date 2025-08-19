@@ -6,7 +6,7 @@ import request from "supertest";
 
 import { createCartAndCartItem } from "@/utils/test-e2e/create-cart-and-cart-items";
 
-describe("Update Cart Item Quantity controler (e2e)", () => {
+describe("Update Cart Item Quantity controller (e2e)", () => {
   beforeAll(async () => {
     await app.ready();
   });

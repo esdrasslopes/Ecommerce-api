@@ -6,7 +6,7 @@ import request from "supertest";
 
 import { createAndAuthenticateUser } from "@/utils/test-e2e/create-and-authenticate-user";
 
-describe("Create Cart controler (e2e)", () => {
+describe("Create Cart controller (e2e)", () => {
   beforeAll(async () => {
     await app.ready();
   });
@@ -16,10 +16,10 @@ describe("Create Cart controler (e2e)", () => {
   });
 
   it("should be able to create cart", async () => {
-    const { userId, token } = await createAndAuthenticateUser(app, true);
+    const { token } = await createAndAuthenticateUser(app, true);
 
     const response = await request(app.server)
-      .post(`/carts/create/${userId}`)
+      .post(`/carts/create`)
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toEqual(201);

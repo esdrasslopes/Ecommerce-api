@@ -6,7 +6,7 @@ import request from "supertest";
 
 import { createAndAuthenticateUser } from "@/utils/test-e2e/create-and-authenticate-user";
 
-describe("Create Product controler (e2e)", () => {
+describe("Create Product controller (e2e)", () => {
   beforeAll(async () => {
     await app.ready();
   });

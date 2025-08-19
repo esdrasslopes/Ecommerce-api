@@ -17,7 +17,7 @@ import { getDetailsOfASpecificCartItem } from "./get-details-of-a-specific-cart-
 export const cartsRoutes = async (app: FastifyInstance) => {
   app.addHook("onRequest", verifyJwt);
 
-  app.post("/create/:userId", createCart);
+  app.post("/create", createCart);
 
   app.post("/create/cartItem/:cartId", addItemToCart);
 

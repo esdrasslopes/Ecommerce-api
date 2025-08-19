@@ -6,7 +6,7 @@ import request from "supertest";
 
 import { createCartAndCartItem } from "@/utils/test-e2e/create-cart-and-cart-items";
 
-describe("Create Order controler (e2e)", () => {
+describe("Create Order controller (e2e)", () => {
   beforeAll(async () => {
     await app.ready();
   });
@@ -19,7 +19,7 @@ describe("Create Order controler (e2e)", () => {
     const { token, userId, cartItem } = await createCartAndCartItem(app);
 
     const response = await request(app.server)
-      .post(`/orders/${userId}`)
+      .post(`/orders`)
       .set("Authorization", `Bearer ${token}`)
       .send({
         cartItems: [cartItem],

@@ -6,7 +6,7 @@ import request from "supertest";
 
 import { createCategoryAndProducts } from "@/utils/test-e2e/create-category-and-product";
 
-describe("List All Products Availables controler (e2e)", () => {
+describe("List All Products Availables controller (e2e)", () => {
   beforeAll(async () => {
     await app.ready();
   });

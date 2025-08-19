@@ -6,7 +6,7 @@ import request from "supertest";
 
 import { createOrderAndOrderItems } from "@/utils/test-e2e/create-order-and-order-items";
 
-describe("Cancel Order controler (e2e)", () => {
+describe("Cancel Order controller (e2e)", () => {
   beforeAll(async () => {
     await app.ready();
   });

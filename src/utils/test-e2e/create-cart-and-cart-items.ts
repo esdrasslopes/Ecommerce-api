@@ -8,7 +8,7 @@ export const createCartAndCartItem = async (app: FastifyInstance) => {
   const { token, userId, productId } = await createCategoryAndProducts(app);
 
   const cart = await request(app.server)
-    .post(`/carts/create/${userId}`)
+    .post(`/carts/create`)
     .set("Authorization", `Bearer ${token}`);
 
   const cartId = cart.body.cart.id;

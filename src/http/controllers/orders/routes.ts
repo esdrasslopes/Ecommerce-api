@@ -19,13 +19,13 @@ import { ListOrdersToValidate } from "./list-orders-to-validate";
 export const ordersRoutes = async (app: FastifyInstance) => {
   app.addHook("onRequest", verifyJwt);
 
-  app.post("/:userId", createOrder);
+  app.post("/", createOrder);
 
   app.patch("/:orderId", cancelOrder);
 
   app.get("/:orderId", getDetailsOfASpecificOrder);
 
-  app.get("/history/:userId", getOrdersHistory);
+  app.get("/history", getOrdersHistory);
 
   app.patch(
     "/validate/:orderId",

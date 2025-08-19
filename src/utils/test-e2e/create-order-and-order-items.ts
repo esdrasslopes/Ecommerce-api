@@ -9,7 +9,7 @@ export const createOrderAndOrderItems = async (app: FastifyInstance) => {
     await createCartAndCartItem(app);
 
   const response = await request(app.server)
-    .post(`/orders/${userId}`)
+    .post(`/orders`)
     .set("Authorization", `Bearer ${token}`)
     .send({
       cartItems: [cartItem],

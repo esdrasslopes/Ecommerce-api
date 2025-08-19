@@ -101,10 +101,6 @@ export const productsByPriceQuerySchema = z.object({
   page: z.coerce.number(),
 });
 
-export const createCartParamsSchema = z.object({
-  userId: z.string(),
-});
-
 export const addItemToCartParamsSchema = z.object({
   cartId: z.string(),
 });
@@ -139,10 +135,6 @@ export const getDetailsOfASpecificCartItemParamsSchema = z.object({
   cartItemId: z.string(),
 });
 
-export const createOrderParamsSchema = z.object({
-  userId: z.string(),
-});
-
 const cartItemSchema = z.object({
   id: z.string(),
   cart_id: z.string(),
@@ -160,10 +152,6 @@ export const cancelOrderParamsSchema = z.object({
 
 export const getDetailsOfASpecificOrderParamsSchema = z.object({
   orderId: z.string(),
-});
-
-export const getOrderHistoryParamsSchema = z.object({
-  userId: z.string(),
 });
 
 export const getOrderHistoryQuerySchema = z.object({
